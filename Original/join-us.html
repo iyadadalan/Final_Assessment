@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweatFactory - Join Us</title>
+  <link rel="icon" type="image/x-icon" href="img/sf-favicon.png">
+  <!--<link rel="stylesheet" href="join-us.css">-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=League+Gothic&family=Tenor+Sans&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+      body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    white-space: nowrap;
+  }
+  
+  p, h6{
+    cursor: default;
+  }
+
+  header {
+    background-color: #F9EF23;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a{
+          text-decoration: none;
+          color: black;
+        }
+
+  .logo {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-family: 'Anton', sans-serif;
+    font-style: italic;
+    letter-spacing: 5px;
+    margin-left: 20px;
+  }
+  
+  .logo img {
+    width: 20%;
+    height: 20%;
+    margin-right: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin-right: 50px;
+    padding-left: 5px;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-left: 40px;
+    text-align: right;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+  }
+  
+  nav ul li a {
+    color: #1B1C1F;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+  }
+  
+  nav ul li a:hover {
+    color: #846A00;
+  }
+  
+  nav ul li a:active {
+    color: #5f4c03;
+  }
+      
+  .first-section {
+    display: flex;
+  }
+      
+  .first-div {
+    width: 35%;
+    color: white;
+    text-align: center;
+    background-color: black;
+  }
+  
+  .first-div h6 {
+    font-family: 'League Gothic', sans-serif;
+    font-size: 60px;
+    letter-spacing: 7px;
+    line-height: 1.5;
+    margin: 0;
+    margin-top: 80px;
+    padding: 0;
+    }
+  
+  .first-div p {
+    font-family: 'Tenor Sans', sans-serif;
+    line-height: 30px;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+  
+  .first-div button {
+    font-family: 'League Gothic', sans-serif;
+    font-size: 30px;
+    letter-spacing:3px;
+    margin-top: 50px;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #F9EF23;
+    border-style: hidden;
+  }
+      
+  .second-div {
+    width: 65%;
+  }
+      
+  .slider {
+    position: relative;
+    height: auto;
+    display: none;
+  }
+      
+  .slider.active {
+    display: block;
+  }
+      
+  .slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+      
+  .slider .description {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin-left: 35px;
+  }
+  
+  .description h6 {
+    font-family: 'League Gothic', sans-serif;
+    font-size: 50px;
+    background-color: #F9EF23;
+    margin: 0;
+    letter-spacing: 5px;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+  }
+  
+  .description p {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 17px;
+    line-height: 30px;
+    margin-top: 50px;
+    color: white;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 100px;
+  }
+  
+  .slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 1;
+  }
+        
+  .prev-button, .next-button {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-style: normal;
+    text-shadow: #141414;
+    font-size: 40px;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 2px 2px 4px black;
+  }
+        
+  .prev-button {
+    position: absolute;
+    left: 10px;
+  }
+        
+  .next-button {
+    position: absolute;
+    right: 10px;
+  }
+
+  #join-button {
+    transition: color 0.5s ease;
+  }
+
+  .prev-button:hover, .next-button:hover, #join-button:hover {
+    transform: scale(1.05);
+  }
+
+  #join-button:hover {
+    background-color: #141414;
+    border: solid 1px #F9EF23;
+    color: #F9EF23;
+    cursor: pointer;
+  }
+
+  .second-div {
+    position: relative;
+  }
+
+  .pagination {
+    position: absolute;
+    bottom: 60px;
+    left: 83px;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .pagination-button {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border-style: hidden;
+    margin: 0px;
+    background-color: gray;
+    cursor: pointer;
+  }
+
+  #pg1 {
+  left: 0;
+  } 
+
+  #pg2 {
+    left: 20px;
+  }
+
+  #pg3 {
+    left: 40px;
+  }
+
+  #pg4 {
+    left: 60px;
+  }
+
+  #pg5 {
+    left: 80px;
+  }
+
+  .pagination-button.active {
+    background-color: white;
+  }
+     
+  #image-background {
+    background-image: url("https://images.pexels.com/photos/4761352/pexels-photo-4761352.jpeg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 800px;
+  }
+  
+  .second-section {
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  .second-section h6, .form h6{
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+    color: #F9EF23;
+    font-size: 51px;
+    font-style: italic;
+    padding-top: 30px;
+    letter-spacing: 2px;
+    
+  }
+  
+  .second-section p, .form p {
+    font-family: 'Tenor Sans', sans-serif;
+    color: white;
+    font-size: 15px;
+    margin: 0;
+    padding-top: 10px;
+  }
+
+  .package {
+    text-align: center;
+  }
+  
+  .package img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .getStarted button {
+    padding: 77px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    border-radius: 10px;
+  }
+
+  .second-section {
+    position: relative;
+    text-align: center;
+  }
+  
+  .getStarted button {
+    padding: 15px 75px;;
+    border: #141414;
+    background-color: #35aadc;
+    font-family: 'Anton', sans-serif;
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.5s ease;
+  }
+
+  .getStarted {
+    position: absolute;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-50%);
+    transition: color 0.5s ease;
+  }
+
+  .getStarted button:hover {
+    transform: scale(1.005);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  #button1 {
+    margin-right: 61px;
+    background-color: #F9EF23;
+  }
+  
+  #button3 {
+    margin-left: 61px;
+    background-color: #ff3131;
+  }
+
+  #button1:hover {
+    color: #F9EF23;
+    background-color: black;
+    border: solid 3.5px #F9EF23;
+  }
+
+  #button2:hover {
+    color: #35aadc;
+    background-color: black;
+    border: solid 3.5px #35aadc;
+  }
+
+  #button3:hover {
+    color: #ff3131;
+    background-color: black;
+    border: solid 3.5px #ff3131;
+  }
+  
+  .third-section {
+    display: flex;
+  }
+  
+  .form {
+    width: 65%;
+    padding: 20px;
+    background-color: black;
+  }
+  
+  .third-section {
+    display: flex;
+    margin-top: 9px;
+  }
+  
+  .form {
+    width: 65%;
+    padding: 20px;
+    background-color: black;
+    text-align: center;
+  }
+  
+  .form h6 {
+    font-size: 51px;
+  }
+  
+  .form p {
+    font-size: 15px;
+    margin-bottom: 60px;
+  }
+  
+  .form-group {
+    margin-bottom: 35px;
+    position: relative;
+  }
+  
+  .form-group label {
+    display: none;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #F9EF23;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="tel"],
+  .form-group select {
+    background-color: white;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 30% auto;
+    padding-left: 3%;
+    box-sizing: border-box;
+    width: 60%;
+    height: 50px;
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+
+  .form-group input[type="email"] {
+    text-transform: none;
+  }
+
+  ::placeholder {
+    color: black;
+    text-transform: uppercase;
+  }
+
+  .form-group input[type="submit"] {
+    font-family: "League Gothic", sans-serif;
+    font-size: 26px;
+    color: white;
+    letter-spacing: 3px;
+    background-color: #ff3131;
+    width: 10%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-style: hidden;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    transition: background-color 0.3s ease;
+  }
+
+  .form-group input[type="submit"]:hover {
+    background-color: #F9EF23;
+    color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  
+  .deco {
+    width: 35%;
+    background-image: url('https://images.pexels.com/photos/2261484/pexels-photo-2261484.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-size: cover;
+  }
+
+  footer {
+            background-color: #1B1C1F;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Tenor Sans', sans-serif;
+            
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            font-family: 'League Gothic', sans-serif;
+            font-size: 24px;
+        }
+
+        footer ul li {
+            margin: 0 10px;
+        }
+
+        footer ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.5s ease;
+        }
+
+        footer hr {
+            border: none;
+            border-top: 1px solid #FFFFFF;
+            margin: 20px 0;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        footer .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #FFFFFF;
+        }
+        
+        footer ul li a:hover {
+          color: #F9EF23;
+        }
+
+        footer .social-icons img:hover {
+          transform: scale(1.03);
+        }
+  
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1><a href="index.html">SWEATFACTORY.</a></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="lifestyle.html">LIFESTYLE</a></li>
+        <li><a href="exercises.html">EXERCISES</a></li>
+        <li><a href="join-us.html">JOIN US</a></li>
+        <li><a href="about-us.html">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="first-section">
+    <div class="first-div">
+      <br><br>
+      <h6>A SNEAK PEAK <br>OF OUR GYM.</h6>
+      <p>Take a Look at Our State-of-the-Art<br>Facilities and Get a Glimpse of Your<br>Possible New Lifestyle</p>
+      <button id="join-button">JOIN US TODAY</button>
+    </div>
+    <div class="second-div" id="slider-container">
+      <div class="slider active">
+        <img src="https://images.pexels.com/photos/7031706/pexels-photo-7031706.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image1">
+        <div class="description">
+          <h6>CARDIO EXERCISE AREA</h6>
+          <p>Equipped with treadmills, ellipticals, stationary<br>bikes, and other equipment for aerobic exercise.</p>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-button">&#60;</button>
+            <button class="next-button">&#62;</button>
+          </div>
+      </div>
+      <div class="slider">
+        <img src="https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image2">
+        <div class="description">
+          <h6>WEIGHTLIFTING AREA</h6>
+          <p>Includes weights such as dumbbells, barbells, <br>weight plates, and weightlifting benches.</p>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-button">&#60;</button>
+            <button class="next-button">&#62;</button>
+          </div>
+      </div>
+      <div class="slider">
+        <img src="https://cdn.pixabay.com/photo/2016/12/25/22/49/workout-1931107_1280.jpg" alt="image3">
+        <div class="description">
+          <h6>STRETCHING AND FLEXIBILITY AREA</h6>
+          <p>A space for stretching exercises and flexibility training. Equipped with mats,<br> foam rollers, yoga props, and other equipment to support stretching routines.</p>
+        </div>        <div class="slider-controls">
+            <button class="prev-button">&#60;</button>
+            <button class="next-button">&#62;</button>
+          </div>
+      </div>
+      <div class="slider">
+        <img src="https://images.pexels.com/photos/4162589/pexels-photo-4162589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image4">
+        <div class="description">
+          <h6>LOCKER ROOMS AND SHOWERS</h6>
+          <p>Separate locker rooms for men and women. Include lockers to <br>store personal belongings, changing areas, and showers.</p>
+        </div>        <div class="slider-controls">
+            <button class="prev-button">&#60;</button>
+            <button class="next-button">&#62;</button>
+          </div>
+      </div>
+      <div class="slider">
+        <img src="https://images.pexels.com/photos/8092430/pexels-photo-8092430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image5">
+        <div class="description">
+          <h6>SAUNA / STEAM ROOM</h6>
+          <p>Indulge yourself in the sauna or steam room to <br>revitalize your body and soul after a long workout.</p>
+        </div>        <div class="slider-controls">
+            <button class="prev-button">&#60;</button>
+            <button class="next-button">&#62;</button>
+          </div>
+      </div>
+      <div class="pagination">
+        <button class="pagination-button active" id="pg1"></button>
+        <button class="pagination-button" id="pg2"></button>
+        <button class="pagination-button" id="pg3"></button>
+        <button class="pagination-button" id="pg4"></button>
+        <button class="pagination-button" id="pg5"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="second-section" id="image-background">
+    <h6>BE A MEMBER NOW</h6>
+    <p>Discover the perfect fitness plan for you from our<br>comprehensive selection of personalized packages.</p>
+    <div class="package">
+      <img src="img/package-img.png" alt="packages">
+    </div>
+    <div class="getStarted">
+      <button id="button1">GET STARTED</button>
+      <button id="button2">GET STARTED</button>
+      <button id="button3">GET STARTED</button>
+    </div>
+  </div>
+
+  <div class="third-section">
+    <div class="form">
+      <h6>REGISTRATION</h6>
+      <p>Complete the form below, and our team of experts will<br>contact you soon</p>
+  
+      <form id="myForm" action="https://formspree.io/f/mbjenplo" method="post"> <!--https://formspree.io/forms/mbjenplo/submissions-->
+        <div class="form-group">
+          <label for="fullName">FULL NAME</label>
+          <input type="text" id="fullName" name="fullName" placeholder="FULL NAME" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">EMAIL</label>
+          <input type="email" id="email" name="email" placeholder="EMAIL" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="phone">PHONE NUMBER</label>
+          <input type="tel" id="phone" name="phone" placeholder="PHONE NUMBER" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="package">CHOOSE PACKAGE</label>
+          <select id="package" name="package" required>
+            <option class="placeholder" value="">CHOOSE PACKAGE</option>
+            <option value="starter">Starter</option>
+            <option value="basic">Basic</option>
+            <option value="premium">Premium</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <input type="submit" value="SUBMIT">
+        </div>
+      </form>
+    </div>
+    
+    <div class="deco"></div>
+  </div>
+  
+  <footer>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="lifestyle.html">LIFESTYLE</a></li>
+      <li><a href="exercises.html">EXERCISES</a></li>
+      <li><a href="join-us.html">JOIN US</a></li>
+      <li><a href="about-us.html">ABOUT US</a></li>
+    </ul>
+    <hr>
+    <p>© 2023 SweatFactory Sdn. Bhd. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://twitter.com/home"><img src="img/twitter-black.png" alt="twitter-icon" width="30px" height="30px"></a>
+      <a href="https://www.facebook.com"><img src="img/facebook-black.png" alt="facebook-icon" width="30px" height="30px"></a>
+      <a href="https://www.instagram.com"><img src="img/instagram-black.png" alt="instagram-icon" width="30px" height="30px"></a>
+      <a href="https://mail.google.com"><img src="img/gmail-black.png" alt="gmail-icon" width="30px" height="30px"></a>
+      <a href="https://wa.me/+60123456789"><img src="img/whatsapp-black.png" alt="whatsapp-icon" width="30px" height="30px"></a>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+   $(document).ready(function() {
+      // Image slider 
+      var currentSlide = 0;
+      var sliderItems = $('.slider');
+      var paginationButtons = $('.pagination-button');
+
+      function showSlide(index) {
+        sliderItems.removeClass('active');
+        $(sliderItems[index]).addClass('active');
+        paginationButtons.removeClass('active');
+        $(paginationButtons[index]).addClass('active');
+      }
+
+      function updateSlider() {
+        showSlide(currentSlide);
+      }
+
+      $('.next-button').click(function() {
+        currentSlide++;
+        if (currentSlide >= sliderItems.length) {
+          currentSlide = 0;
+        }
+        updateSlider();
+      });
+
+      $('.prev-button').click(function() {
+        currentSlide--;
+        if (currentSlide < 0) {
+          currentSlide = sliderItems.length - 1;
+        }
+        updateSlider();
+      });
+
+      $('.pagination-button').click(function() {
+        currentSlide = $(this).index();
+        updateSlider();
+      });
+
+      // Autofill package
+      $('#button1').click(function() {
+        $('#package').val('starter');
+        var element = document.getElementById('myForm');
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      $('#button2').click(function() {
+        $('#package').val('basic');
+        var element = document.getElementById('myForm');
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      $('#button3').click(function() {
+        $('#package').val('premium');
+        var element = document.getElementById('myForm');
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Scroll down
+    document.getElementById('join-button').addEventListener('click', function() {
+    var element = document.getElementById('image-background');
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Get all the necessary elements
+      const sliders = document.querySelectorAll(".slider");
+      const paginationButtons = document.querySelectorAll(".pagination-button");
+      let currentSlide = 0;
+
+      // Function to show the specified slide
+      function showSlide(slideIndex) {
+        // Hide all slides and remove active class from pagination buttons
+        sliders.forEach(function(slider) {
+          slider.classList.remove("active");
+        });
+        paginationButtons.forEach(function(button) {
+          button.classList.remove("active");
+        });
+
+        // Show the specified slide and add active class to its pagination button
+        sliders[slideIndex].classList.add("active");
+        paginationButtons[slideIndex].classList.add("active");
+      }
+
+      // Function to handle the automatic sliding
+      function autoSlide() {
+        // Increment the current slide index
+        currentSlide++;
+
+        // Reset the current slide index if it exceeds the number of slides
+        if (currentSlide >= sliders.length) {
+          currentSlide = 0;
+        }
+
+        // Show the next slide
+        showSlide(currentSlide);
+      }
+
+      // Automatically slide every 4 seconds
+      setInterval(autoSlide, 4000);
+
+      // Event listeners for previous and next buttons
+      const prevButton = document.querySelector(".prev-button");
+      const nextButton = document.querySelector(".next-button");
+
+      prevButton.addEventListener("click", function() {
+        currentSlide--;
+
+        if (currentSlide < 0) {
+          currentSlide = sliders.length - 1;
+        }
+
+        showSlide(currentSlide);
+      });
+
+      nextButton.addEventListener("click", function() {
+        currentSlide++;
+
+        if (currentSlide >= sliders.length) {
+          currentSlide = 0;
+        }
+
+        showSlide(currentSlide);
+      });
+
+      // Event listeners for pagination buttons
+      paginationButtons.forEach(function(button, index) {
+        button.addEventListener("click", function() {
+          currentSlide = index;
+          showSlide(currentSlide);
+        });
+      });
+    });
+</script>
+</body>
+</html>
