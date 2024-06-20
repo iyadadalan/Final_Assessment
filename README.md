@@ -30,20 +30,20 @@ Details about the project, its goals, and overall summary.
 
 ## Enhancements
 
-### Input Validation - Iyad
+### <a name="input-validation"/>Input Validation - Iyad
 Description and implementation details of input validation methods.
 
-### Authentication - Muhammad
+### <a name="authentication"/>Authentication - Muhammad
 Details on the authentication mechanisms implemented.
 
-### Authorization - Muhammad
+### <a name="authorization"/>Authorization - Muhammad
 Explanation of the authorization processes enhanced.
 
-### XSS and CSRF Prevention - Iyad
+### <a name="xss-and-csrf-prevention"/>XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
 
-### Database Security - Arif
+### <a name="databse-security"/>Database Security - Arif
 Enhancements made to secure the database interactions.
 
-### File Security - Arif
+### <a name="file-security"/>File Security - Arif
 Methods used to secure file management and storage.
