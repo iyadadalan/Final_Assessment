@@ -13,27 +13,37 @@
   - [File Security](#file-security)
 
 ## Group Members
-List of group members and their roles or contributions.
+Wan Hamzah Iyad bin Wan Adlan (2115449) - Leader
+- Input Validation
+- XSS & CSRF Defence
+
+Muhammad bin Abas (2113201)
+- Authentication
+- Authorization
+
+Muhammad Arif Faisal bin Zahari (2117277)
+- Database Security
+- File Security
 
 ## Project Overview
 Details about the project, its goals, and overall summary.
 
 ## Enhancements
 
-### Input Validation
+### Input Validation - Iyad
 Description and implementation details of input validation methods.
 
-### Authentication
+### Authentication - Muhammad
 Details on the authentication mechanisms implemented.
 
-### Authorization
+### Authorization - Muhammad
 Explanation of the authorization processes enhanced.
 
-### XSS and CSRF Prevention
+### XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
 
-### Database Security
+### Database Security - Arif
 Enhancements made to secure the database interactions.
 
-### File Security
+### File Security - Arif
 Methods used to secure file management and storage.
