@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweatFactory - About Us</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=League+Gothic&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/sf-favicon.png">
+
+<style>
+
+        body{
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #141414;
+        }
+
+        p,h1, h2, h3, h4, h5, h6 {
+          cursor: default;
+        }
+        
+        header {
+          background-color: #F9EF23;
+          color: black;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo a{
+          text-decoration: none;
+          color: black;
+        }
+
+        .logo {
+          font-size: 18px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          font-family: 'Anton', sans-serif;
+          font-style: italic;
+          letter-spacing: 5px;
+          margin-left: 20px;
+        }
+        
+        .logo img {
+          width: 20%;
+          height: 20%; /* Adjust the height of the logo image */
+          margin-right: 10px; /* Add some spacing between the logo image and text */
+        }
+        
+        nav ul {
+          list-style-type: none;
+          margin-right: 50px;
+          padding-left: 5px;
+          display: flex;
+        }
+        
+        nav ul li {
+          margin-left: 40px;
+          text-align: right;
+          font-family: 'Anton', sans-serif;
+          font-size: 20px;
+        }
+        
+        nav ul li a {
+          color: #1B1C1F;
+          text-decoration: none;
+          transition: color 0.3s ease; 
+        }
+
+        nav ul li a:hover {
+          color: #846A00; /* Change color on hover */
+        }
+    
+        nav ul li a:active {
+          color: #5f4c03; /* Change color when clicked */
+        }
+
+        .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px;
+        }
+
+        .white-text {
+        color: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+        padding: 20px;
+        text-align: center;
+        background-color: #171103;
+        font-size: 40px;
+        height: 70px;
+        }
+
+        .second-header-about {
+        font-family: 'League Gothic', Arial, sans-serif;
+        color: white;
+        }
+
+        .second-header-contact {
+        font-family: 'League Gothic', Arial, sans-serif;
+        color: white;
+        }
+
+        /* About Section */
+        .about-image img {
+        width: 100%;
+        height: 680px;
+        margin-left: -50px;
+        margin-top: -255px;
+        margin-bottom: -259px;
+        }
+
+        .about-content {
+        width: 45%;
+        height: 600px;
+        }
+
+        .about-header {
+            color: white;
+            text-align: center;
+            font-family: 'Anton', sans-serif;
+            font-size: 40px;
+        }
+
+        .about-para {
+            color: white;
+            text-align: center;
+            font-family: 'Tenor Sans', sans-serif;
+        }
+
+        /* Contact Section */
+
+        .contact-image {
+        position: relative;
+        }
+
+        .contact-image img {
+        width: 100%;
+        height: auto;
+        }
+
+        .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        }
+
+        .overlay h3 {
+        font-size: 110px;
+        font-family: 'Anton', Arial, sans-serif;
+        color: white;
+        }
+
+        .contact-content {
+        display: flex;
+        justify-content: space-between;
+        }
+
+        .contact-item {
+        flex-basis: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+        }
+
+        .contact-header {
+        color: white;
+        text-align: center;
+        font-family: 'League Gothic', sans-serif;
+        font-size: 30px;
+        letter-spacing: 3px;
+        }
+
+        .contact-para {
+        color: white;
+        text-align: center;
+        font-size: 19px;
+        font-family: 'Tenor Sans', sans-serif;
+        letter-spacing: 2px;
+        margin-top: 0;
+        }
+
+
+        .social-media {
+        list-style-type: none;
+        }
+
+        .social-media li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: white;
+        align-content: center;
+        font-family: 'Tenor Sans', sans-serif;
+        }
+
+        .social-media li img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        }
+
+        footer {
+            background-color: #1B1C1F;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Tenor Sans', sans-serif;
+            
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            font-family: 'League Gothic', sans-serif;
+            font-size: 24px;
+        }
+
+        footer ul li {
+            margin: 0 10px;
+        }
+
+        footer ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.5s ease;
+        }
+
+        footer hr {
+            border: none;
+            border-top: 1px solid #FFFFFF;
+            margin: 20px 0;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        footer .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #FFFFFF;
+        }
+        
+        footer ul li a:hover {
+          color: #F9EF23;
+        }
+
+        footer .social-icons img:hover {
+          transform: scale(1.03);
+        }
+
+</style>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+          <h1><a href="index.php">SWEATFACTORY.</a></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="lifestyle.php">LIFESTYLE</a></li>
+            <li><a href="exercises.php">EXERCISES</a></li>
+            <li><a href="join-us.php">JOIN US</a></li>
+            <li><a href="about-us.php">ABOUT US</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section id="about">
+        <header class="section-header">
+          <h2 class="second-header-about">ABOUT.</h2>
+        </header>
+
+        <div class="container">
+
+          <div class="about-image">
+            <img src="img\aboutus1.jpg" alt="About Image" height="600px">
+          </div>
+
+          <div class="about-content">
+            <h3 class="about-header"><em><b>About Us</b></em></h3>
+            <p class="about-para">
+                SweatFactory is a community-centered gym located at Kuala Lumpur. We are dedicated to help individuals achieve personal growth through good exercises, good diets and good habits.
+            </p>
+            <h3 class="about-header"><em><b>Our Vision</b></em></h3>
+            <p class="about-para">
+                Empowering individuals to lead healthy and active lifestyles through a community-centered fitness experience
+            </p>
+            <h3 class="about-header"><em><b>Our Mission</b></em></h3>
+            <p class="about-para">
+                To provide a welcoming environment that promotes physical fitness, mental wellness, and personal growth.
+            </p>
+          </div>
+
+        </div>
+
+        </section>
+
+    <section id="contact">
+
+        <header class="section-header">
+          <h2 class="second-header-contact">CONTACT.</h2>
+        </header>
+
+    <div class="container2">
+
+            <div class="container3">
+                <div class="contact-image">
+                  <img src="img\aboutus2.jpg" alt="Contact Image">
+                  <div class="overlay">
+                    <h3 class="banner"><em>GET IN TOUCH</em></h3>
+                </div>
+            </div>
+
+        <div class="contact-content">
+
+            <div class="contact-item">
+              <h3 class="contact-header">LOCATION</h3>
+
+              <div class="google-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d939.9963033602562!2d101.74147699900202!3d3.2081546103530685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc38379a6f91cb%3A0xbd3cdae8da67b55f!2sXtreme%20Hardcore%20Gym%20%26%20Fitness%20Center!5e0!3m2!1sen!2smy!4v1686999797394!5m2!1sen!2smy" width="235" height="235" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <h3 class="contact-header">OPERATING HOURS</h3>
+              <p class="contact-para">
+                MONDAYS TO SUNDAYS <br> 03:00AM to 00:00AM
+              </p>
+            </div>
+
+            <div class="contact-item">
+              <h3 class="contact-header">CONTACT US</h3>
+              <ul class="social-media">
+                <li><img src="img\twitter.png" alt="Twitter"><span>@sweatfactory</span></li>
+                <br>
+                <li><img src="img\facebook.png" alt="Facebook"><span>sweatfactory</span></li>
+                <br>
+                <li><img src="img\instagram.png" alt="Instagram"><span>@sweatfactorygym</span></li>
+                <br>
+                <li><img src="img\whatsapp.png" alt="Number"><span>012-3456789</span></li>
+                <br>
+                <li><img src="img\gmail.png" alt="Email"><span>info@sweatfactory.com</span></li>
+              </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    </section>
+
+    <footer>
+      <ul>
+        <li><a href="index.php">HOME</a></li>
+        <li><a href="lifestyle.php">LIFESTYLE</a></li>
+        <li><a href="exercises.php">EXERCISES</a></li>
+        <li><a href="join-us.php">JOIN US</a></li>
+        <li><a href="about-us.php">ABOUT US</a></li>
+      </ul>
+      <hr>
+      <p>© 2023 SweatFactory Sdn. Bhd. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://twitter.com/home"><img src="img/twitter-black.png" alt="twitter-icon" width="30px" height="30px"></a>
+        <a href="https://www.facebook.com"><img src="img/facebook-black.png" alt="facebook-icon" width="30px" height="30px"></a>
+        <a href="https://www.instagram.com"><img src="img/instagram-black.png" alt="instagram-icon" width="30px" height="30px"></a>
+        <a href="https://mail.google.com"><img src="img/gmail-black.png" alt="gmail-icon" width="30px" height="30px"></a>
+        <a href="https://wa.me/+60123456789"><img src="img/whatsapp-black.png" alt="whatsapp-icon" width="30px" height="30px"></a>
+      </div>
+    </footer>
+    
+</body>
+  
+</html>
