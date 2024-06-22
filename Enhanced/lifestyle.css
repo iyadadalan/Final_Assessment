@@ -1,0 +1,494 @@
+*{
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #ffffff;
+  }
+
+  p,h1, h2, h3, h4, h5, h6 {
+    cursor: default;
+  }
+
+  header {
+    background-color: #F9EF23;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -32px;
+  }
+
+  .logo a{
+    text-decoration: none;
+    color: black;
+  }
+
+  .logo {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-family: 'Anton', sans-serif;
+    font-style: italic;
+    letter-spacing: 5px;
+    margin-left: 20px;
+  }
+  nav ul {
+    list-style-type: none;
+    margin-right: 50px;
+    padding-left: 5px;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-left: 40px;
+    text-align: right;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+  }
+  nav ul li a {
+    color: #1B1C1F;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+  }
+  nav ul li a:hover {
+    color: #846A00; /* Change color on hover */
+  }
+  nav ul li a:active {
+    color: #5f4c03; /* Change color when clicked */
+  }
+  .image-wrapper img {
+    width: 720px; /* Adjust the width of the image */
+    padding-left: 80px;
+  }
+  .banner {
+      background-color: #171103;
+      color: #ffffff;
+      font-family: 'League Gothic', sans-serif;
+      letter-spacing: 1.5px;
+      padding: 0;
+      margin: 0px;
+  }
+  .sectionHeader {
+      padding: 10px;
+      margin-left: 20px;
+      font-size: 49px;
+      color: #ffffff;
+  }
+  #accordion{
+    margin: 100px auto;
+    width: 400px;
+    padding-right: 100px;
+    flex: 1;
+  }
+  #accordion li{
+    list-style: none;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #181717;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  #accordion label{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 1.0px;
+    font-weight: 500;
+    font-size: 27px;
+    cursor: pointer;
+    color: whitesmoke;
+    font-family: 'Anton', sans-serif;
+  
+  }
+
+  #accordion label #arrow{
+    transform: rotate(90deg);
+    font-size: 22px;
+    color: #c5c5c5;
+  }
+  #accordion label + input[type="radio"]{
+    display: none;
+  }
+  .content1{
+    color: white;
+    font-family: 'Tenor Sans', sans-serif;
+  }
+  #accordion .content1{
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    font-size: 20px;
+  }
+  #accordion label + input[type="radio"]:checked + .content1{
+    max-height:400px;
+  }
+  .accordion-image-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .diet{
+    background-image: url("img/diet-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: -38px;
+  }
+  .image-wrapper {
+    flex: 1;
+    margin-right: 20px;
+  }
+  .habits{
+    margin-bottom: -37px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: -100px;
+  }
+
+  .panel{
+    border: none;
+    padding: 23px;
+    text-align: right;
+
+  }
+  .panel h2{
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    color: white;
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  .panel .content1{
+    font-size: 22px;
+    text-align: justify;
+    width: 380px;
+  }
+  .panel span
+  {
+    color: #e7dc44;
+    font-size: larger;
+  }
+  #bullet{
+    color: #e7dc44;
+  }
+  .ui-widget{
+    background-color: #1B1C1F;
+    border: none;
+    position: absolute;
+  }
+  .ui-widget-header{
+    color: #e7dc44;
+    background-color: #141414;
+    border: none;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 2px;
+  }
+  .ui-widget-content{
+    color: rgb(255, 84, 84);
+    border: none;
+    font-family: 'Tenor Sans', sans-serif;
+  }
+  .ui-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+    }
+  .ui-dialog .ui-dialog-titlebar-close:hover {
+    background-color: grey;
+  }
+  .box {
+    width: 500px;
+    background: #0B0B02;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 2px 2px 20px 5px rgba(0,0,0,0.5);
+  }
+
+  .bigbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+      
+  .content {
+      padding: 30px;
+      font-family: 'Anton', 'sans-serif';
+  }
+
+  .input {
+      background: #181717;
+      border-radius: 12px;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      
+  }
+  .input label {
+      display: block;
+      font-size: 30px;
+      color: #F9EF23;
+      margin-bottom: 20px;
+  }
+  .input input {
+      outline: none;
+      border: none;
+      border-bottom: 2px solid #F9EF23;
+      width: 50%;
+      text-align: center;
+      font-size: 28px;
+      font-family: "Nunito", sans-serif;
+      background-color: #181717;
+      color: white;
+      font-family: 'Anton', 'sans-serif';
+  }
+
+  .containerHW {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+  }
+
+  .inputW {
+      background: #181717;
+      border-radius: 12px;
+      padding: 10px 0;
+      margin-bottom: 20px;
+  }
+  .inputW label {
+      display: block;
+      font-size: 20px;
+      color: #F9EF23;
+      margin-bottom: 20px;
+  }
+  .inputW input {
+      outline: none;
+      border: none;
+      border-bottom: 2px solid #e7dc44;
+      width: 50%;
+      text-align: center;
+      font-size: 28px;
+      background-color: #181717;
+      color: white;
+      font-family: 'Anton', 'sans-serif';
+  }
+
+  .inputH {
+      background: #181717;
+      border-radius: 12px;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      margin-right: 20px;
+  }
+  .inputH label {
+      display: block;
+      font-size: 20px;
+      color: #e7dc44;
+      margin-bottom: 20px;
+  }
+  .inputH input {
+      outline: none;
+      border: none;
+      border-bottom: 2px solid #F9EF23;
+      width: 50%;
+      text-align: center;
+      font-size: 28px;
+      background-color: #181717;
+      color: white;
+      font-family: 'Anton', 'sans-serif';
+  }
+
+  button.calculate {
+      cursor: pointer;
+      font-family: 'Anton', 'sans-serif';
+      color: black;
+      background: #F9EF23;
+      font-size: 29px;
+      border-radius: 7px;
+      padding: 12px 0;
+      width: 100%;
+      outline: none;
+      border: none;
+      transition: all 0.5s;
+      margin-bottom: -20px;
+    }
+  button.calculate:hover {
+      background: #846A00;
+  }
+  button.calculate:active {
+      background-color: #5f4c03;
+  }
+  
+  .result {
+      padding: 10px 20px;
+  }
+  .result p {
+      font-weight: 600;
+      font-size: 22px;
+      color: white;
+      margin-bottom: 15px;
+      font-family:'Tenor Sans', sans-serif;
+  }
+  .result #result {
+      font-size: 36px;
+      font-weight: 900;
+      color: #F9EF23;
+      background-color: #181717;
+      display: inline-block;
+      padding: 0px 20px;
+      border-radius: 55px;
+      margin-bottom: -10px;
+      font-family: 'Anton', 'sans-serif';
+      }
+  #comment {
+      color: #F9EF23;
+      font-weight: 800;
+  }
+
+  .comment {
+      display: none;
+      border-radius: 7px;
+      padding: 5px;
+  }
+
+  .gender {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      align-content: center;
+      background: #181717;
+      border-radius: 12px;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      color: #F9EF23;
+  }
+
+  /* Style for Radio */
+  .gender .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-top: 7px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+  /* Hide the browser's default radio button */
+  .gender .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+  }
+    
+  /* Create a custom radio button */
+  .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+  }
+    
+  /* On mouse-over, add a grey background color */
+  .gender .container:hover input ~ .checkmark {
+      background-color: #b5b5b5;
+  }
+    
+  /* When the radio button is checked, add a blue background */
+  .gender .container input:checked ~ .checkmark {
+      background-color: #ccc;
+  }
+    
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+  }
+    
+  /* Show the indicator (dot/circle) when checked */
+  .gender .container input:checked ~ .checkmark:after {
+      display: block;
+  }
+    
+  /* Style the indicator (dot/circle) */
+  .gender .container .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #000000;
+  }
+  /* END Style for Radio */
+  
+  footer {
+      background-color: #1B1C1F;
+      color: #FFFFFF;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Tenor Sans', sans-serif;
+      
+  }
+
+  footer ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      font-family: 'League Gothic', sans-serif;
+      font-size: 24px;
+  }
+
+  footer ul li {
+      margin: 0 10px;
+  }
+
+  footer ul li a {
+      color: #FFFFFF;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.5s ease;
+  }
+
+  footer hr {
+      border: none;
+      border-top: 1px solid #FFFFFF;
+      margin: 20px 0;
+  }
+
+  footer .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      transition: transform 0.3s ease;
+  }
+
+  footer .social-icons a {
+      display: inline-block;
+      margin: 0 10px;
+      color: #FFFFFF;
+  }
+  
+  footer ul li a:hover {
+    color: #F9EF23;
+  }
+
+  footer .social-icons img:hover {
+    transform: scale(1.03);
+  }
