@@ -6,34 +6,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare the stored procedure call
-    if ($stmt = $conn->prepare("CALL GetUserByEmail(?)")) {
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format";
+    } else {
+        // Prepare the stored procedure call
+        if ($stmt = $conn->prepare("CALL GetUserByEmail(?)")) {
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($result->num_rows == 1) {
-            // User found, verify the password
-            $row = $result->fetch_assoc();
-            if (password_verify($password, $row['password'])) {
-                // Password verification successful, set session variables
-                $_SESSION['loggedin'] = true;
-                $_SESSION['email'] = $email;
+            if ($result->num_rows == 1) {
+                // User found, verify the password
+                $row = $result->fetch_assoc();
+                if (password_verify($password, $row['password'])) {
+                    // Password verification successful, set session variables
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['email'] = $email;
 
-                // Redirect to index.php
-                header("Location: join-us.html");
-                exit;
+                    // Redirect to index.php
+                    header("Location: join-us.html");
+                    exit;
+                } else {
+                    // Password verification failed, redirect back to login page with error message
+                    $error = "Invalid email or password";
+                }
             } else {
-                // Password verification failed, redirect back to login page with error message
+                // User not found, redirect back to login page with error message
                 $error = "Invalid email or password";
             }
+            $stmt->close();
         } else {
-            // User not found, redirect back to login page with error message
-            $error = "Invalid email or password";
+            $error = "Database error: " . $conn->error;
         }
-        $stmt->close();
-    } else {
-        $error = "Database error: " . $conn->error;
     }
 }
 ?>
@@ -45,6 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="formValidation.js"></script> <!-- Link to your JavaScript file -->
+
 </head>
 <body>
     <div class="container">
@@ -54,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" required><br><br>
+            <input type="text" id="email" name="email" required pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="Enter a valid email address"><br><br>
 
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password" required><br><br>
