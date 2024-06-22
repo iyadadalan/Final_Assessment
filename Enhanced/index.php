@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE php>
+<php lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,15 +13,15 @@
 <body>
   <header>
     <div class="logo">
-      <h1><a href="index.html">SWEATFACTORY.</a></h1>
+      <h1><a href="index.php">SWEATFACTORY.</a></h1>
     </div>
     <nav>
       <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="lifestyle.html">LIFESTYLE</a></li>
-        <li><a href="exercises.html">EXERCISES</a></li>
-        <li><a href="join-us.html">JOIN US</a></li>
-        <li><a href="about-us.html">ABOUT US</a></li>
+        <li><a href="index.php">HOME</a></li>
+        <li><a href="lifestyle.php">LIFESTYLE</a></li>
+        <li><a href="exercises.php">EXERCISES</a></li>
+        <li><a href="join-us.php">JOIN US</a></li>
+        <li><a href="about-us.php">ABOUT US</a></li>
       </ul>
     </nav>
   </header>
@@ -32,7 +32,7 @@
       <div class="overlay">
         <h1><em>BE YOUR BEST</em></h1>
         <br><br>
-        <a href="join-us.html" class="button">JOIN TODAY</a>
+        <a href="join-us.php" class="button">JOIN TODAY</a>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
       <div class="centered-content">
         <h2>ABOUT OUR ORGANIZATION</h2>
         <p>A community-centered gym located in Kuala Lumpur. We are dedicated to helping individuals achieve personal growth through good exercises, good diets, and good habits.</p>
-        <a href="about-us.html">Learn More</a>
+        <a href="about-us.php">Learn More</a>
       </div>
     </div>
 
@@ -57,19 +57,19 @@
     <P>Improve your life with these simple tips.</P><br>
     <div class="img-container">
       <div class="image-container">
-        <a href="lifestyle.html#diet">
+        <a href="lifestyle.php#diet">
           <img src="img/diet.png" alt="diet" width="380" height="380">
           <p>DIET</p>
         </a>
       </div>
       <div class="image-container">
-        <a href="lifestyle.html#habits">
+        <a href="lifestyle.php#habits">
           <img src="img/habits.png" alt="habits" width="380" height="380">
           <p>HEALTHY HABITS</p>
         </a>
       </div>
       <div class="image-container">
-        <a href="lifestyle.html#bmi">
+        <a href="lifestyle.php#bmi">
           <img src="img/bmi.png" alt="bmi" width="380" height="380">
           <p>BMI<br>CALCULATOR</p>
         </a>
@@ -78,17 +78,17 @@
   </div>
 
   <div class="exercises-homepage">
-    <br><br><h1 id="exercises.html">EXERCISES</h1>
+    <br><br><h1 id="exercises.php">EXERCISES</h1>
     <P>Our top priority is ensuring that you have the ultimate workout experience.</P><br>
     <div class="img-container">
       <div class="image-container">
-        <a href="exercises.html#workout-plan">
+        <a href="exercises.php#workout-plan">
           <img src="img/Exercise.png" alt="exercise" width="380" height="380">
           <p>WORKOUT PLAN</p>
         </a>
       </div>
       <div class="image-container">
-        <a href="exercises.html#recommendations">
+        <a href="exercises.php#recommendations">
           <img src="img/threadmill.png" alt="recommendations" width="380" height="380">
           <p>EXERCISE RECOMMENDATIONS</p>
         </a>
@@ -98,11 +98,11 @@
 
   <footer>
     <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="lifestyle.html">LIFESTYLE</a></li>
-      <li><a href="exercises.html">EXERCISES</a></li>
-      <li><a href="join-us.html">JOIN US</a></li>
-      <li><a href="about-us.html">ABOUT US</a></li>
+      <li><a href="index.php">HOME</a></li>
+      <li><a href="lifestyle.php">LIFESTYLE</a></li>
+      <li><a href="exercises.php">EXERCISES</a></li>
+      <li><a href="join-us.php">JOIN US</a></li>
+      <li><a href="about-us.php">ABOUT US</a></li>
     </ul>
     <hr>
     <p>© 2023 SweatFactory Sdn. Bhd. All rights reserved.</p>
@@ -116,4 +116,4 @@
   </footer>
   <script src="index.js"></script>
 </body>
-</html>
+</php>

@@ -14,15 +14,15 @@
 <body>
   <header>
     <div class="logo">
-      <h1><a href="index.html">SWEATFACTORY.</a></h1>
+      <h1><a href="index.php">SWEATFACTORY.</a></h1>
     </div>
     <nav>
       <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="lifestyle.html">LIFESTYLE</a></li>
-        <li><a href="exercises.html">EXERCISES</a></li>
-        <li><a href="join-us.html">JOIN US</a></li>
-        <li><a href="about-us.html">ABOUT US</a></li>
+        <li><a href="index.php">HOME</a></li>
+        <li><a href="lifestyle.php">LIFESTYLE</a></li>
+        <li><a href="exercises.php">EXERCISES</a></li>
+        <li><a href="join-us.php">JOIN US</a></li>
+        <li><a href="about-us.php">ABOUT US</a></li>
       </ul>
     </nav>
   </header>
@@ -152,11 +152,11 @@
   
   <footer>
     <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="lifestyle.html">LIFESTYLE</a></li>
-      <li><a href="exercises.html">EXERCISES</a></li>
-      <li><a href="join-us.html">JOIN US</a></li>
-      <li><a href="about-us.html">ABOUT US</a></li>
+      <li><a href="index.php">HOME</a></li>
+      <li><a href="lifestyle.php">LIFESTYLE</a></li>
+      <li><a href="exercises.php">EXERCISES</a></li>
+      <li><a href="join-us.php">JOIN US</a></li>
+      <li><a href="about-us.php">ABOUT US</a></li>
     </ul>
     <hr>
     <p>© 2023 SweatFactory Sdn. Bhd. All rights reserved.</p>
@@ -172,4 +172,4 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="join-us.js"></script>
 </body>
-</html>
+      </html>
