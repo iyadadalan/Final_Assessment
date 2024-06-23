@@ -1,6 +1,10 @@
 <?php
 include 'security_utils.php';
 
+session_start(); // Ensure session is started before generating or verifying CSRF tokens
+
+$csrf_token = generate_csrf_token();
+
 $error_message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check CSRF token
@@ -17,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (empty($fullName) || empty($phone)) {
             $error_message = "Please fill in all required fields.";
         } else {
+            // Process the form data here if all checks are passed
         }
     }
 }
@@ -151,12 +156,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="form">
       <h6>REGISTRATION</h6>
       <p>Complete the form below, and our team of experts will<br>contact you soon</p>
-      <?php if (!empty($error_message)): ?>
+        <?php if (!empty($error_message)): ?>
             <p style="color: red;"><?php echo $error_message; ?></p>
-      <?php endif; ?>
+        <?php endif; ?>
   
       <form id="myForm" action="https://formspree.io/f/xdknngdj" method="post"> <!--https://formspree.io/f/xdknngdj/submissions-->
-        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
         <div class="form-group">
           <label for="fullName">FULL NAME</label>
           <input type="text" id="fullName" name="fullName" placeholder="FULL NAME" required>
