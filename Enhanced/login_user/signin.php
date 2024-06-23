@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (password_verify($password, $user_data['password'])) {
                     $_SESSION['user_id'] = $user_data['user_id'];
                     $_SESSION['username'] = $user_data['username'];
+                    $_SESSION['email'] = $user_data['email'];
+                    $_SESSION['user_type'] = $user_data['user_type'];
 
                     if ($user_data['user_type'] == 'admin') {
                         header('Location: ../adminpage/admin_index.php');

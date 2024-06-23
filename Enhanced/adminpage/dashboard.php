@@ -2,11 +2,15 @@
 session_start();
 include("../connection.php");
 
-// Ensure admin is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: signin.php");
-    exit();
+// Check if username is set in session
+if ($_SESSION['user_type'] !== 'admin') {
+    // Check if the user role is admin and redirect accordingly
+    if (isset($_SESSION['user_type']) && isset($_SESSION['username'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 }
+
 function random_num($length) {
     $text = '';
     if ($length < 5) {
@@ -18,17 +22,26 @@ function random_num($length) {
     }
     return $text;
 }
+
 // Handle user creation
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = md5($_POST['password'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Use password_hash instead of md5
     $gender = $_POST['gender'];
     $user_type = $_POST['user_type'];
 
-	$user_id = random_num(5);
-	$query = "insert into users (user_id,email,password,username,gender,user_type) values ('$user_id','$email','$password','$username','$gender', '$user_type')";
-    mysqli_query($conn, $query);
+    $user_id = random_num(5);
+
+    $query = "INSERT INTO users (user_id, email, password, username, gender, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param($stmt, "ssssss", $user_id, $email, $password, $username, $gender, $user_type);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        echo "User created successfully!";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 }
 
 // Fetch all users
@@ -67,8 +80,8 @@ $result = mysqli_query($conn, $query);
                     <td><?php echo htmlspecialchars($row['gender']); ?></td>
                     <td><?php echo htmlspecialchars($row['user_type']); ?></td>
                     <td>
-                        <a href="edit_user.php?id=<?php echo $row['user_id']; ?>">Edit</a>
-                        <a href="delete_user.php?delete=<?php echo $row['user_id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        <a href="edit_user.php?user_id=<?php echo $row['user_id']; ?>">Edit</a>
+                        <a href="delete_user.php?user_id=<?php echo $row['user_id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                     </td>
                 </tr>
                 <?php } ?>

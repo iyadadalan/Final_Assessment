@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
     // Validate and sanitize email input
     if (isset($_SESSION['email']) && filter_var($_SESSION['email'], FILTER_VALIDATE_EMAIL)) {
         $email = $_SESSION['email'];
+        
 
         // Prepare the stored procedure call
         $query = "CALL GetUserByEmail(?)";
@@ -26,7 +27,7 @@ if (!isset($_SESSION['username'])) {
             if ($row = mysqli_fetch_assoc($result)) {
                 // Store username and user role in session
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['user_role'] = $row['user_role'];
+                $_SESSION['user_type'] = $row['user_type'];
             } else {
                 echo "User not found!";
                 exit();
@@ -43,14 +44,10 @@ if (!isset($_SESSION['username'])) {
         exit();
     }
 }
-
 // Check if username is set in session
-if (isset($_SESSION['username'])) {
+if ($_SESSION['user_type'] !== 'admin') {
     // Check if the user role is admin and redirect accordingly
-    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
-        header("Location: ../adminpage/admin_index.php");
-        exit();
-    } else {
+    if (isset($_SESSION['user_type']) && isset($_SESSION['username'])) {
         header("Location: ../index.php");
         exit();
     }
@@ -76,12 +73,14 @@ mysqli_close($conn);
     <link rel="stylesheet" href="admin_index.css">
 </head>
 <body>
+
   <header>
     <div class="logo">
       <h1><a href="admin_index.php">SWEATFACTORY.</a></h1>
     </div>
     <nav>
       <ul>
+
         <li><a href="admin_index.php">HOME</a></li>
         <li><a href="lifestyle.php">LIFESTYLE</a></li>
         <li><a href="exercises.php">EXERCISES</a></li>
