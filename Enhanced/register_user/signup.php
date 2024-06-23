@@ -1,33 +1,48 @@
 <?php 
 session_start();
+include("../connection.php");
 
-	include("../connection.php");
-	include("../functions.php");
+function random_num($length) {
+    $text = '';
+    if ($length < 5) {
+        $length = 5;
+    }
+    $len = rand(4, $length);
+    for ($i = 0; $i < $len; $i++) {
+        $text .= rand(0, 9);
+    }
+    return $text;
+}
 
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $user_name = htmlspecialchars($_POST['user_name']);
+    $gender = htmlspecialchars($_POST['gender']);
+    $user_type = 'user';
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		$email = htmlspecialchars($_POST['email']);
-		$password = htmlspecialchars($_POST['password']);
-        $user_name = htmlspecialchars($_POST['user_name']);
-        $gender = htmlspecialchars($_POST['gender']);
+    if (!empty($email) && !empty($password)) {
+        // Hash the password using password_hash
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        // Generate a random user ID
+        $user_id = random_num(5);
 
-		if(!empty($email) && !empty($password))
-		{
-			$password_hash = md5($password);
-			//save to database
-			$user_id = random_num(5);
-			$query = "insert into users (user_id,email,password,username,gender) values ('$user_id','$email','$password_hash','$user_name','$gender')";
+        // Prepare the stored procedure call
+        if ($stmt = $conn->prepare("CALL RegisterUser(?, ?, ?, ?, ?, ?)")) {
+            $stmt->bind_param("ssssss", $user_id, $email, $password_hash, $user_name, $gender, $user_type);
+            $stmt->execute();
+            $stmt->close();
 
-			mysqli_query($con, $query);
-
-			header("Location: ../login_user/signin.php");
-			die;
-		}else
-		{
-			echo "Please enter some valid information!";
-		}
-	}
+            // Redirect to login page
+            header("Location: ../login_user/signin.php");
+            die;
+        } else {
+            echo "Database error: " . $conn->error;
+        }
+    } else {
+        echo "Please enter some valid information!";
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,14 +1,23 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure admin is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: signin.php");
     exit();
 }
-
+function random_num($length) {
+    $text = '';
+    if ($length < 5) {
+        $length = 5;
+    }
+    $len = rand(4, $length);
+    for ($i = 0; $i < $len; $i++) {
+        $text .= rand(0, 9);
+    }
+    return $text;
+}
 // Handle user creation
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
     $username = $_POST['username'];
@@ -19,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create'])) {
 
 	$user_id = random_num(5);
 	$query = "insert into users (user_id,email,password,username,gender,user_type) values ('$user_id','$email','$password','$username','$gender', '$user_type')";
-    mysqli_query($con, $query);
+    mysqli_query($conn, $query);
 }
 
 // Fetch all users
 $query = "SELECT * FROM users";
-$result = mysqli_query($con, $query);
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>

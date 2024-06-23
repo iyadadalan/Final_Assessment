@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure user is logged in
 if (!isset($_SESSION['username'])) {
@@ -12,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 // Get the user's information
 $username = $_SESSION['username'];
 $query = "SELECT username, email, password, gender, user_type FROM users WHERE username = '$username'";
-$result = mysqli_query($con, $query);
+$result = mysqli_query($conn, $query);
 
 if ($result) {
     $user_data = mysqli_fetch_assoc($result);
@@ -24,7 +23,7 @@ if ($result) {
         exit();
     }
 } else {
-    echo "Error: " . mysqli_error($con);
+    echo "Error: " . mysqli_error($conn);
     exit();
 }
 ?>

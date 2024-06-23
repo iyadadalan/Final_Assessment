@@ -3,7 +3,6 @@
 session_start(); // Ensure session is started before generating or verifying CSRF tokens
 
 include("../connection.php");
-include("../functions.php");
 include 'security_utils.php';
 
 $csrf_token = generate_csrf_token();

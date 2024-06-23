@@ -2,24 +2,66 @@
 session_start();
 
 include("../connection.php");
-include("../functions.php");
 
-$query = "select * from users";
-$result = mysqli_query($con, $query);
+// Check if the user is logged in or not
+if (!isset($_SESSION['username'])) {
+    // Validate and sanitize email input
+    if (isset($_SESSION['email']) && filter_var($_SESSION['email'], FILTER_VALIDATE_EMAIL)) {
+        $email = $_SESSION['email'];
 
-if ($result) {
-  $row = mysqli_fetch_assoc($result);
+        // Prepare the stored procedure call
+        $query = "CALL GetUserByEmail(?)";
 
-  if ($row) {
-    $_SESSION['username'] = $row['username'];
-  } else {
-    echo "Username not found!";
-  }
-} else {
-  echo "Error: " . mysqli_error($con);
+        if ($stmt = mysqli_prepare($conn, $query)) {
+            // Bind the parameter
+            mysqli_stmt_bind_param($stmt, "s", $email);
+
+            // Execute the statement
+            mysqli_stmt_execute($stmt);
+
+            // Get result
+            $result = mysqli_stmt_get_result($stmt);
+
+            // Check if user exists
+            if ($row = mysqli_fetch_assoc($result)) {
+                // Store username and user role in session
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['user_role'] = $row['user_role'];
+            } else {
+                echo "User not found!";
+                exit();
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Database error: " . mysqli_error($conn);
+            exit();
+        }
+    } else {
+        echo "Invalid email address!";
+        exit();
+    }
 }
 
+// Check if username is set in session
+if (isset($_SESSION['username'])) {
+    // Check if the user role is admin and redirect accordingly
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+        header("Location: ../adminpage/admin_index.php");
+        exit();
+    } else {
+        header("Location: ../index.php");
+        exit();
+    }
+} else {
+    echo "Not logged in.";
+}
+
+// Close connection
+mysqli_close($conn);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

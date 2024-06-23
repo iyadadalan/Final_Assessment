@@ -33,8 +33,8 @@
         <li><a href="exercises.php">EXERCISES</a></li>
         <li><a href="join-us.php">JOIN US</a></li>
         <li><a href="about-us.php">ABOUT US</a></li>
-        <li><a href="login.php">LOGIN</a></li>
-        <li><a href="register.php">REGISTER</a></li>
+        <li><a href="login_user/signin.php">LOGIN</a></li>
+        <li><a href="register_user/signup.php">REGISTER</a></li>
       </ul>
     </nav>
   </header>

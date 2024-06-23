@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure admin is logged in
 if (!isset($_SESSION['username'])) {
@@ -9,7 +8,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$id = isset($_GET['user_id']) ? $_GET['user_id'] : null;
+$id = isset($_GET['user_id']);
 if (!$id) {
     die("User ID is required.");
 }
@@ -17,31 +16,49 @@ if (!$id) {
 // Handle user update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['user_id'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $gender = $_POST['gender'];
-    $user_type = $_POST['user_type'];
+    $username = htmlspecialchars($_POST['username']);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $gender = htmlspecialchars($_POST['gender']);
+    $user_type = htmlspecialchars($_POST['user_type']);
 
-    $query = "UPDATE users SET username='$username', email='$email', gender='$gender', user_type='$user_type'";
+    if ($email === false) {
+        die("Invalid email format.");
+    }
+
+    // Initialize the query
+    $query = "UPDATE users SET username = ?, email = ?, gender = ?, user_type = ?";
+
+    // Check if password is provided
+    if (!empty($_POST['password'])) {
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $query .= ", password = ?";
+    }
+
+    $query .= " WHERE user_id = ?";
+
+    // Prepare the statement
+    $stmt = $conn->prepare($query);
 
     if (!empty($_POST['password'])) {
-        $password = md5($_POST['password']);
-        $query .= ", password='$password'";
-    }
-
-    $query .= " WHERE user_id='$id'";
-
-    $result = mysqli_query($con, $query);
-
-    if ($result) {
-        header("Location: dashboard.php?msg=Data updated successfully");
+        $stmt->bind_param('sssssi', $username, $email, $gender, $user_type, $password, $id);
     } else {
-        echo "Failed: " . mysqli_error($con);
+        $stmt->bind_param('ssssi', $username, $email, $gender, $user_type, $id);
     }
+
+    // Execute the statement and check the result
+    if ($stmt->execute()) {
+        header("Location: dashboard.php?msg=Data updated successfully");
+        exit();
+    } else {
+        echo "Failed: " . $stmt->error;
+    }
+
+    // Close the statement
+    $stmt->close();
 }
 
 // Fetch user details
-$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? LIMIT 1");
+$stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ? LIMIT 1");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result()->fetch_assoc();
@@ -49,6 +66,10 @@ $result = $stmt->get_result()->fetch_assoc();
 if (!$result) {
     die("User not found.");
 }
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>

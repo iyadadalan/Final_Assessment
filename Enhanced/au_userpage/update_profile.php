@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure user is logged in
 if (!isset($_SESSION['username'])) {
@@ -9,21 +8,42 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// Get the logged-in user's username
 $username = $_SESSION['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$gender = $_POST['gender'];
 
+// Retrieve and sanitize the input data
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+$gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
+
+// Check if the password is provided
 if (!empty($password)) {
-    $password_hash = md5($password);
-    $query = "UPDATE users SET username='$username', email='$email', password='$password_hash', gender='$gender' WHERE username='$username'";
+    // Hash the password using a strong algorithm
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    // Use a prepared statement to prevent SQL injection
+    $query = "UPDATE users SET email = ?, password = ?, gender = ? WHERE username = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ssss', $email, $password_hash, $gender, $username);
+} else {
+    // If the password is not provided, update other fields only
+    $query = "UPDATE users SET email = ?, gender = ? WHERE username = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('sss', $email, $gender, $username);
 }
 
-if (mysqli_query($con, $query)) {
+// Execute the prepared statement and check the result
+if ($stmt->execute()) {
     echo "Profile updated successfully!";
 } else {
-    echo "Error updating profile: " . mysqli_error($con);
+    echo "Error updating profile: " . $stmt->error;
 }
 
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+
+// Redirect to profile page
 header("Location: profile.php");
+exit();
 ?>

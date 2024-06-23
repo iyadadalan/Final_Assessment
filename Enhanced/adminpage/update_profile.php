@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure user is logged in
 if (!isset($_SESSION['username'])) {
@@ -9,21 +8,50 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// Get current username from session
 $username = $_SESSION['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$gender = $_POST['gender'];
+
+// Sanitize and validate inputs
+$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+$password = htmlspecialchars($_POST['password']);
+$gender = htmlspecialchars($_POST['gender']);
+
+if ($email === false) {
+    echo "Invalid email format.";
+    exit();
+}
 
 if (!empty($password)) {
-    $password_hash = md5($password);
-    $query = "UPDATE users SET username='$username', email='$email', password='$password_hash', gender='$gender' WHERE username='$username'";
-}
-
-if (mysqli_query($con, $query)) {
-    echo "Profile updated successfully!";
+    // Hash the password securely
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
 } else {
-    echo "Error updating profile: " . mysqli_error($con);
+    echo "Password cannot be empty.";
+    exit();
 }
 
+// Prepare statement to update user data
+$query = "UPDATE users SET email=?, password=?, gender=? WHERE username=?";
+$stmt = mysqli_prepare($conn, $query);
+
+if ($stmt) {
+    // Bind parameters and execute statement
+    mysqli_stmt_bind_param($stmt, "ssss", $email, $password_hash, $gender, $username);
+    mysqli_stmt_execute($stmt);
+
+    // Check if update was successful
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        echo "Profile updated successfully!";
+    } else {
+        echo "Error updating profile or no changes made.";
+    }
+
+    // Close statement
+    mysqli_stmt_close($stmt);
+} else {
+    echo "Error preparing statement: " . mysqli_error($con);
+}
+
+// Redirect to profile page
 header("Location: profile.php");
+exit();
 ?>

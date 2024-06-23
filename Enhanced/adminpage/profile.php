@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../connection.php");
-include("../functions.php");
 
 // Ensure user is logged in
 if (!isset($_SESSION['username'])) {
@@ -9,16 +8,24 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Get the user's information
 $username = $_SESSION['username'];
-$query = "SELECT username, email, password, gender, user_type FROM users WHERE username = '$username'";
-$result = mysqli_query($con, $query);
+
+// Prepare statement to retrieve user data
+$query = "SELECT username, email, gender, user_type FROM users WHERE username = ?";
+$stmt = mysqli_prepare($conn, $query);
+
+// Bind parameters and execute statement
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
+
+// Get result
+$result = mysqli_stmt_get_result($stmt);
 
 if ($result) {
     $user_data = mysqli_fetch_assoc($result);
     if ($user_data) {
-        // Censor the password
-        $censored_password = str_repeat('*', (5));
+        // Censor the password (not fetching password for security reasons)
+        $censored_password = "*****"; // Replace with appropriate logic if needed
     } else {
         echo "User not found!";
         exit();
@@ -27,7 +34,12 @@ if ($result) {
     echo "Error: " . mysqli_error($con);
     exit();
 }
+
+// Close statement and connection
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
