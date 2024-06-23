@@ -1,3 +1,27 @@
+<?php
+include 'security_utils.php';
+
+$error_message = "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check CSRF token
+    if (!verify_csrf_token($_POST['csrf_token'])) {
+        $error_message = "CSRF token validation failed.";
+    } else {
+        // Sanitize and validate inputs
+        $fullName = sanitize_input($_POST['fullName']);
+        $email = filter_var(sanitize_input($_POST['email']), FILTER_VALIDATE_EMAIL);
+        $phone = sanitize_input($_POST['phone']); // Assume phone validation if needed
+
+        if (!$email) {
+            $error_message = "Invalid email format.";
+        } elseif (empty($fullName) || empty($phone)) {
+            $error_message = "Please fill in all required fields.";
+        } else {
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,8 +151,12 @@
     <div class="form">
       <h6>REGISTRATION</h6>
       <p>Complete the form below, and our team of experts will<br>contact you soon</p>
+      <?php if (!empty($error_message)): ?>
+            <p style="color: red;"><?php echo $error_message; ?></p>
+      <?php endif; ?>
   
-      <form id="myForm" action="https://formspree.io/f/mbjenplo" method="post"> <!--https://formspree.io/forms/mbjenplo/submissions-->
+      <form id="myForm" action="https://formspree.io/f/xdknngdj" method="post"> <!--https://formspree.io/f/xdknngdj/submissions-->
+        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
         <div class="form-group">
           <label for="fullName">FULL NAME</label>
           <input type="text" id="fullName" name="fullName" placeholder="FULL NAME" required>
