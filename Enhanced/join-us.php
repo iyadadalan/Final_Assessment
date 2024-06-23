@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com 'unsafe-inline';
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    img-src 'self' https://images.pexels.com data:;
+    font-src 'self' https://fonts.gstatic.com;
+    frame-src 'self' https://www.google.com;
+    connect-src 'self';
+    media-src 'self';
+    object-src 'none';
+    child-src 'none';">
   <title>SweatFactory - Join Us</title>
   <link rel="icon" type="image/x-icon" href="img/sf-favicon.png">
   <!--<link rel="stylesheet" href="join-us.css">-->
