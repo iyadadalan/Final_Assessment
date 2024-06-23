@@ -132,3 +132,46 @@
         });
       });
     });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('myForm');
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const packageSelect = document.getElementById('package');
+
+    form.addEventListener('submit', function(event) {
+        let valid = true;
+        let errorMessages = '';
+
+        // Validate Full Name (allow only letters and some special characters like spaces, hyphens)
+        if (!/^[a-zA-Z\s'-]+$/.test(fullName.value)) {
+            errorMessages += 'Invalid full name. Only letters, spaces, and hyphens are allowed.\n';
+            valid = false;
+        }
+
+        // Validate Email (simple pattern)
+        if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+            errorMessages += 'Invalid email format.\n';
+            valid = false;
+        }
+
+        // Validate Phone Number (allow only numbers and some specific characters like +, -, spaces)
+        if (!/^\+?[0-9\s-]+$/.test(phone.value)) {
+            errorMessages += 'Invalid phone number. Only numbers, spaces, "+", and "-" are allowed.\n';
+            valid = false;
+        }
+
+        // Check if a package is selected
+        if (packageSelect.value === '') {
+            errorMessages += 'Please select a package.\n';
+            valid = false;
+        }
+
+        // If there are errors, prevent form submission and show error messages
+        if (!valid) {
+            event.preventDefault(); // Prevent form submission
+            alert('Please correct the following errors:\n\n' + errorMessages);
+        }
+    });
+});
