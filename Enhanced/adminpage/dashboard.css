@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    margin-top: 40px;
+    color: #333;
+}
+
+.user-records table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-records th, .user-records td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.user-records th {
+    background-color: #105749;
+    color: white;
+}
+
+.user-records td a {
+    color: #105749;
+    text-decoration: none;
+}
+
+.user-records td a:hover {
+    text-decoration: underline;
+}
+
+.create-user, .edit-user-container {
+    margin-top: 20px;
+}
+
+.create-user form, .edit-user-container form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.create-user label, .edit-user-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.create-user input, .create-user select, .edit-user-container input, .edit-user-container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-user button, .edit-user-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #105749;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-user button:hover, .edit-user-container button:hover {
+    background-color: #083d33;
+}
