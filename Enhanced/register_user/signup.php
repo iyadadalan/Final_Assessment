@@ -59,29 +59,36 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <head>
         <title>Sign Up</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self';
+            script-src 'self';
+            style-src 'self' https://fonts.googleapis.com;
+            font-src 'self' https://fonts.gstatic.com;
+            img-src 'self';
+            form-action 'self';
+            connect-src 'self';
+            frame-ancestors 'none';
+            base-uri 'self';">
         <link rel="stylesheet" type="text/css" href="signup.css">
+        <script src="signup_validation.js"></script>
     </head>
     <body>
         
         <div id="form">
             <h1>Sign Up</h1>
-            <form onsubmit="isvalid()" method="POST" autocomplete="off">
+            <form onsubmit="return validateForm();" method="POST" autocomplete="off">
                 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <label>Full Name: </label>
-                <input type="text" id="user_name" name="user_name" pattern="^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$" required><br><br>
-                
-                <label>Email: </label>
-                <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required><br><br>
-                
-                <label>Password: </label>
-                <input type="password" id="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required><br><br>
-                
-                <label>Gender: </label>
+                <label>Full Name:</label>
+                <input type="text" id="user_name" name="user_name" required><br><br>
+                <label>Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label>Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <label>Gender:</label>
                 <input type="radio" id="male" name="gender" value="male" required>
                 <label for="male">Male</label>
                 <input type="radio" id="female" name="gender" value="female" required>
                 <label for="female">Female</label><br><br>
-                
                 <input type="submit" id="btn" value="Submit"><br><br>
                 <a href="../login_user/signin.php">Click to Login</a><br><br>
             </form>
