@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 - Binds the parameters (user_id, email, password_hash, user_name, gender, and user_type) to the prepared statement and executes it.
 - Closes the statement and redirects the user to the login page upon successful registration.
 
-[signin.php](signin.php)
+[signin.php](Final_Assessment/Enhanced/reister_user/signin.php)
 
 ## Credential Verification
 ```php
