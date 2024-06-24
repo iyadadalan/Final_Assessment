@@ -6,8 +6,8 @@ include("security_utils.php");
 
 $csrf_token = generate_csrf_token();
 
-$query = "select * from users";
-$result = mysqli_query($con, $query);
+$query = "select * from users where user_id = " . $_SESSION['user_id'];
+$result = mysqli_query($conn, $query);
 
 if ($result) {
   $row = mysqli_fetch_assoc($result);
@@ -18,7 +18,7 @@ if ($result) {
     echo "Username not found!";
   }
 } else {
-  echo "Error: " . mysqli_error($con);
+  echo "Error: " . mysqli_error($conn);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

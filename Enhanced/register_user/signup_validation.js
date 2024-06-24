@@ -24,3 +24,4 @@ function validateForm() {
 
     return true; // Proceed with form submission if validations pass
 }
+

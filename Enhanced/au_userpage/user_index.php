@@ -27,8 +27,8 @@ if ($result) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self';
-        style-src 'self' https://fonts.googleapis.com;
+        script-src 'self' ;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         img-src 'self' https://images.pexels.com;
         font-src 'self' https://fonts.gstatic.com;
         connect-src 'self';

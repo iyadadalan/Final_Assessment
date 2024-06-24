@@ -1,6 +1,6 @@
 <?php
+session_start();
 include("../connection.php");
-
 // Check if username is set in session
 if ($_SESSION['user_type'] !== 'admin') {
   // Check if the user role is admin and redirect accordingly
@@ -8,11 +8,12 @@ if ($_SESSION['user_type'] !== 'admin') {
       header("Location: ../index.php");
       exit();
   }
-} else {
-  echo "Not logged in.";
-}
+} 
 // Handle user deletion
-$id = $_GET["user_id"];
+if (isset($_GET['user_id'])) {
+    $id = $_GET['user_id'];
+    $query = "DELETE FROM users WHERE user_id='$id'";
+    $result = mysqli_query($conn, $query);
 
 // Prepare an SQL statement for execution
 $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
@@ -23,18 +24,8 @@ if ($stmt) {
     // Execute the prepared statement
     if ($stmt->execute()) {
         header("Location: dashboard.php?msg=Data deleted successfully");
-    } else {
-        echo "Failed: " . $stmt->error;
-    }
-    
-    // Close the statement
-    $stmt->close();
-} else {
-    echo "Failed: " . $conn->error;
+      } else {
+        echo "Failed: " . mysqli_error($conn);
+      }
 }
-
-// Close the database connection
-$conn->close();
-
-
 ?>
