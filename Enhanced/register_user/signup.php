@@ -23,31 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die('CSRF token validation failed.');
     }
 
-    // Regex patterns for validation
-    $regex_name = "/^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$/";
-    $regex_email = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    $regex_password = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/";
-    
     // Sanitize and validate inputs
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password']; // Password will be hashed, no need to sanitize
     $user_name = filter_var($_POST['user_name'], FILTER_SANITIZE_STRING);
     $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
     $user_type = 'user';
-
-    // Validate input
-    if (!preg_match($regex_email, $email)) {
-        echo "Invalid email format";
-        exit;
-    }
-    if (!preg_match($regex_password, $password)) {
-        echo "Password must contain at least 8 characters, including uppercase, lowercase letters, and numbers.";
-        exit;
-    }
-    if (!preg_match($regex_name, $user_name)) {
-        echo "Invalid name format";
-        exit;
-    }
 
     if (!empty($email) && !empty($password)) {
         // Hash the password using password_hash
@@ -114,3 +95,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </body>
 </html>
+
