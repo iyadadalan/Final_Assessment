@@ -209,10 +209,30 @@ Strategies used to prevent XSS and CSRF vulnerabilities.
 
 To combat XSS and CSRF vulnerabilities, several measures have been taken:
 
-- **Content Security Policy (CSP):** A strict CSP is implemented to control the sources of content that can be loaded on the website. This includes restrictions on scripts, styles, and images to trusted sources and disallows inline scripts and styles to mitigate XSS attacks.
+- **Content Security Policy (CSP):** A strict CSP is implemented to control the sources of content that can be loaded on the website. This includes restrictions on scripts, styles, and images to trusted sources and disallows inline scripts and styles to mitigate XSS attacks. A CSP has been added for each page, taking into account the specific resources and scripts utilized on that page.  By customizing the CSP directives to match the unique requirements of each page, the security policy provides precise control over resource loading and script execution, thereby enhancing the overall security posture of the website.
+- join_us.php
+```html
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com 'unsafe-inline';
+    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    img-src 'self' https://images.pexels.com data:;
+    font-src 'self' https://fonts.gstatic.com;
+    frame-src 'self' https://www.google.com;
+    connect-src 'self';
+    media-src 'self';
+    object-src 'none';
+    child-src 'none';">
+  ```
 - **CSRF Tokens:** CSRF tokens are used in all forms to ensure that requests are originated from the website's forms and not from external sources. This token is generated on the server-side, embedded in forms, and verified on each form submission.
 - **Sanitization:** All inputs from users are sanitized using PHP to encode or strip out potentially malicious characters and scripts, reducing the risk of XSS attacks.
+- 
 - **Escaping Output:** When displaying user input or data retrieved from the database, the application uses PHP functions to escape the output, ensuring that any executable code is rendered harmless.
+- 
+- **Update 3rd-Party Libraries:** The jQuery library has been updated to the latest version to mitigate any known vulnerabilities associated with older versions. Also included additional security attributes within the <script> tag.
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+```
 
 These strategies collectively enhance the security of the website by validating input data rigorously and defending against common web vulnerabilities like XSS and CSRF.
 
