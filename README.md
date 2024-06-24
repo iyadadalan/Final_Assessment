@@ -61,7 +61,7 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     gender ENUM('Male', 'Female', 'Other') NOT NULL,
-    user_type ENUM('User', 'Admin') NOT NULL,
+    user_type ENUM('user', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
