@@ -131,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <div id="form">
+        <a href="../index.php"><img src="../img/backbutton.png" alt="Back" style="width:42px;height:42px;margin-right:500px;"></a>
         <h1>Login</h1>
         <form method="POST" autocomplete="off">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
