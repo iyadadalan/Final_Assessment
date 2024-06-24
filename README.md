@@ -43,6 +43,70 @@ Key features of the SweatFactory website include:
 3. **Preventing Web Attacks:** Introduce advanced safeguards to defend against common web vulnerabilities such as Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL injection.
 4. **Ensuring Secure User Interactions:** Deploy mechanisms like Content Security Policies (CSP) to secure user interactions with the website.
 
+## Database Setup
+
+Step 1: Create a new database:
+```sql
+CREATE DATABASE final_assessment;
+```
+Step 2: Switch to the new database:
+```sql
+USE final_assessment;
+```
+Step 3: Create the users table:
+```sql
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    user_type ENUM('User', 'Admin') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+Step 4:  Create a stored procedure to fetch user details by email:
+```sql
+-- Create the stored procedure to get user by email
+DELIMITER //
+
+CREATE PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
+BEGIN
+    SELECT * FROM users WHERE email = p_email LIMIT 1;
+END //
+
+DELIMITER ;
+
+```
+```sql
+-- Create the stored procedure to register a new user
+DELIMITER //
+
+CREATE PROCEDURE RegisterUser(
+    IN p_user_id VARCHAR(255),
+    IN p_email VARCHAR(255),
+    IN p_password VARCHAR(255),
+    IN p_username VARCHAR(255),
+    IN p_gender ENUM('male', 'female'),
+    IN p_user_type ENUM('admin', 'user')
+)
+BEGIN
+    INSERT INTO users (user_id, email, password, username, gender, user_type)
+    VALUES (p_user_id, p_email, p_password, p_username, p_gender, p_user_type);
+END //
+
+DELIMITER ;
+```
+Step 5: Insert admin account
+```sql
+-- Username: admin 
+-- Password: Admin123
+
+INSERT INTO users (username, email, password, gender, user_type)
+VALUES ('admin', 'admin@example.com', '$2y$10$rqOZP1q4uLVgu/9TfZ6rZesQ8y9iynGs1UGfOMAV5brG58cMyOS72', 'Male', 'admin');
+```
+
+
 ## Enhancements
 
 ### <a name="input-validation"/>Input Validation - Iyad
@@ -128,7 +192,6 @@ if ($stmt = $conn->prepare("CALL GetUserByEmail(?)")) {
     // process result
     $stmt->close();
 }
-
 ```
 3. Password Hashing <br>
 Passwords are hashed before being stored in the database. Hashing ensures that even if the database is compromised, the actual passwords are not exposed. The ```password_hash``` function is used to create a secure hash of the password.
@@ -140,5 +203,25 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 ```
 ### <a name="file-security"/>File Security - Arif
 Methods used to secure file management and storage.
+1. Restrict Diretory Listing <br>
+Directory listing in a web server like Apache (which XAMPP uses) can expose the contents of directories to users, potentially revealing sensitive information or files that should not be publicly accessible. Restricting directory listing is an important security measure.
 
-
+  Step 1: Navigate to C:/xampp/apache/conf/. <br>
+  ![image](https://github.com/iyadadalan/Final_Assessment/assets/59950029/e4fe23de-daa5-47b4-92c7-db734321f654)
+  <br><br>
+  Step 2: Open the httpd.conf file with a text editor like Notepad++ or any other text editor. <br>
+  ![image](https://github.com/iyadadalan/Final_Assessment/assets/59950029/255cff2c-27a3-410b-a186-8c535dfc8928)
+  <br><br>
+  Step 3: Change the Options directive to remove Indexes <br>
+```
+<Directory "C:/xampp/htdocs">
+    Options FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+```
+- Options: This directive controls which server features are enabled or disabled in that directory.
+- Indexes: When enabled, if a user requests a directory and no index file (like index.html or index.php) is present, Apache will display a listing of the directory's contents.
+- FollowSymLinks: Allows Apache to follow symbolic links.
+- Includes: Allows server-side includes (SSI).
+- ExecCGI: Allows execution of CGI scripts.
