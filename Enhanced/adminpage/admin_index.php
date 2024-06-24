@@ -8,8 +8,6 @@ if (!isset($_SESSION['username'])) {
     // Validate and sanitize email input
     if (isset($_SESSION['email']) && filter_var($_SESSION['email'], FILTER_VALIDATE_EMAIL)) {
         $email = $_SESSION['email'];
-        
-
         // Prepare the stored procedure call
         $query = "CALL GetUserByEmail(?)";
 
@@ -51,9 +49,7 @@ if ($_SESSION['user_type'] !== 'admin') {
         header("Location: ../index.php");
         exit();
     }
-} else {
-    echo "Not logged in.";
-}
+} 
 
 // Close connection
 mysqli_close($conn);

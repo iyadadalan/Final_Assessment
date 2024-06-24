@@ -3,7 +3,6 @@
 session_start(); // Ensure session is started before generating or verifying CSRF tokens
 
 include("../connection.php");
-include("../functions.php");
 include 'security_utils.php';
 
 $csrf_token = generate_csrf_token();
@@ -29,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$query = "select * from users";
-$result = mysqli_query($con, $query);
+$query = "select * from users where user_id = " . $_SESSION['user_id'];
+$result = mysqli_query($conn, $query);
 
 if ($result) {
   $row = mysqli_fetch_assoc($result);
@@ -41,9 +40,16 @@ if ($result) {
     echo "Username not found!";
   }
 } else {
-  echo "Error: " . mysqli_error($con);
+  echo "Error: " . mysqli_error($conn);
 }
-
+// Check if username is set in session
+if ($_SESSION['user_type'] !== 'admin') {
+  // Check if the user role is admin and redirect accordingly
+  if (isset($_SESSION['user_type']) && isset($_SESSION['username'])) {
+      header("Location: ../index.php");
+      exit();
+  }
+} 
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +91,8 @@ if ($result) {
         <li class="profile-bar">
           <a href="javascript:void(0);" class="dropbtn"><?php echo $_SESSION['username']; ?></a>
           <div class="dropdown-content">
-            <a href="profile.php"><img src="../img/usericon.jpg" alt="Profile Icon" style="width:30px;height:30px;margin-right:30px;">Profile</a>
+          <a href="profile.php"><img src="../img/usericon.jpg" alt="Profile Icon" style="width:30px;height:30px;margin-right:30px;">Profile</a>
+            <a href="dashboard.php"><img src="../img/dashboard.png" alt="Dashboard Icon" style="width:30px;height:30px;margin-right:110px;">Dashboard</a>
             <a href="../logout.php"><img src="../img/logout.jpg" alt="Logout Icon" style="width:25px;height:25px;margin-right:30px;">Logout</a>
           </div>
         </li>
