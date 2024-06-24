@@ -39,8 +39,8 @@ function sanitize_input($data) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com 'unsafe-inline';
-    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com;
+    style-src 'self' https://fonts.googleapis.com;
     img-src 'self' https://images.pexels.com data:;
     font-src 'self' https://fonts.gstatic.com;
     frame-src 'self' https://www.google.com;
