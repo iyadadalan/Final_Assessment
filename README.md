@@ -119,7 +119,7 @@ Details on the authentication mechanisms implemented.
 
 This PHP script handles user authentication by validating the user's email and password during login. The authentication process involves verifying the supplied credentials against stored user data in a MySQL database. When the user want to sign in, there will be a comaprison login in the application with the Hashed Password.
 
-[signup.php](signup.php)
+[signup.php](Enhanced/reister_user/signup.php)
 
 ## Form Handling
 ```php
@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 - Binds the parameters (user_id, email, password_hash, user_name, gender, and user_type) to the prepared statement and executes it.
 - Closes the statement and redirects the user to the login page upon successful registration.
 
-[signin.php](Final_Assessment/Enhanced/reister_user/signin.php)
+[signin.php](Enhanced/reister_user/signin.php)
 
 ## Credential Verification
 ```php
