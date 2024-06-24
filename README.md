@@ -144,28 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 - Hashes the password using password_hash with the default algorithm (currently bcrypt).
 - Generates a random user ID using the random_num function.
 
-## Database Query
-```php
-        if ($stmt = $conn->prepare("CALL RegisterUser(?, ?, ?, ?, ?, ?)")) {
-            $stmt->bind_param("ssssss", $user_id, $email, $password_hash, $user_name, $gender, $user_type);
-            $stmt->execute();
-            $stmt->close();
-
-            header("Location: ../login_user/signin.php");
-            die;
-        } else {
-            echo "Database error: " . $conn->error;
-        }
-    } else {
-        echo "Please enter some valid information!";
-    }
-}
-```
-
-- Prepares a stored procedure call to register the user with the provided details.
-- Binds the parameters (user_id, email, password_hash, user_name, gender, and user_type) to the prepared statement and executes it.
-- Closes the statement and redirects the user to the login page upon successful registration.
-
 [signin.php](Enhanced/register_user/signin.php)
 
 ## Credential Verification
@@ -223,6 +201,8 @@ Hackers4Flat:IyadMadArif
 
 ### <a name="authorization"/>Authorization - Muhammad
 Explanation of the authorization processes enhanced.
+
+
 
 ### <a name="xss-and-csrf-prevention"/>XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
