@@ -30,14 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
     $user_type = 'user';
 
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
-    $user_name = htmlspecialchars($_POST['user_name']);
-    $gender = htmlspecialchars($_POST['gender']);
-    $user_type = 'user';
-
     if (!empty($email) && !empty($password)) {
         // Hash the password using password_hash
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
