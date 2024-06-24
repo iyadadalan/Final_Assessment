@@ -117,7 +117,7 @@ For input validation, extensive use of both client-side and server-side strategi
 ### <a name="authentication"/>Authentication - Muhammad
 Details on the authentication mechanisms implemented.
 
-This PHP script handles user authentication by validating the user's email and password during login. The authentication process involves verifying the supplied credentials against stored user data in a MySQL database. When the user want to sign in, there will be a comaprison login in the application with the Hashed Password.
+The login section will handle user authentication by validating the user's email and password during login. The authentication process involves verifying the supplied credentials against stored user data in a MySQL database. When the user want to sign in, there will be a comaprison login in the application with the Hashed Password.
 
 [signup.php](Enhanced/register_user/signup.php)
 
