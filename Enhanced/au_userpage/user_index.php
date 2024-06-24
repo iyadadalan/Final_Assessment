@@ -3,7 +3,7 @@ session_start();
 
 include("../connection.php");
 
-$query = "select * from users";
+$query = "select * from users where user_id = {$_SESSION['user_id']}";
 $result = mysqli_query($conn, $query);
 
 if ($result) {

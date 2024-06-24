@@ -1,9 +1,10 @@
 <?php
 session_start();
 include("../connection.php");
+// Unset all of the session variables
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // $username = htmlspecialchars($_POST['username']);
+    $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
 
@@ -27,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         header('Location: ../adminpage/admin_index.php');
                     } elseif ($user_data['user_type'] == 'user') {
                         header('Location: ../au_userpage/user_index.php');
+                        
                     }
                     exit;
                 } else {

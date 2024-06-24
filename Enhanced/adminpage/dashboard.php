@@ -94,9 +94,9 @@ $result = mysqli_query($conn, $query);
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"  required>
                 <label for="gender">Gender:</label>
                 <select id="gender" name="gender" required>
                     <option value="Male">Male</option>
