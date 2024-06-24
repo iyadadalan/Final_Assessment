@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include("../connection.php");
+include("security_utils.php");
 
 function random_num($length) {
     $text = '';
@@ -13,6 +14,22 @@ function random_num($length) {
     }
     return $text;
 }
+
+$csrf_token = generate_csrf_token(); // Generate a new CSRF token
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Verify CSRF token
+    if (!verify_csrf_token($_POST['csrf_token'])) {
+        die('CSRF token validation failed.');
+    }
+    
+    // Sanitize and validate inputs
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password']; // Password will be hashed, no need to sanitize
+    $user_name = filter_var($_POST['user_name'], FILTER_SANITIZE_STRING);
+    $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+    $user_type = 'user';
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = htmlspecialchars($_POST['email']);
@@ -57,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div id="form">
             <h1>Sign Up</h1>
             <form onsubmit="isvalid()" method="POST" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
                 <label>Full Name: </label>
                 <input type="text" id="user_name" name="user_name" pattern="^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$" required><br><br>
                 
