@@ -196,7 +196,30 @@ exit;
 - If password verification is successful, sets session variables with user details.
 - Redirects the user to the appropriate page based on their user type (admin or user).
 
-Protecting Website with .htaccess file
+## Protecting Website with .htaccess file
+
+This method uses the .htaccess and .htpasswd files to restrict access to specific areas of a website by requiring user authentication. Below is a detailed explanation of how this method works and the purpose of each line in the provided code.
+
+.htaccess File
+The .htaccess file is a configuration file used by Apache web servers to control access to directories and to manage URL rewriting, redirection, and other server settings.
+
+Contents of the [.htaccess](Enhanced/.htaccess) File
+```
+AuthUserFile C:\xampp\htdocs\Final_Assessment\Enhanced\.htpasswd
+AuthName "Password Protected Area"
+AuthType Basic
+
+<limit GET POST>
+require valid-user
+</limit>
+```
+.htpasswd File
+The .htpasswd file contains the usernames and hashed passwords for users authorized to access the protected area. Each line in the file represents a single user in the format username:password.
+
+Contents of the [.htpaswwd](Enhanced/.htpasswd) File
+```
+Hackers4Flat:IyadMadArif
+```
 
 ### <a name="authorization"/>Authorization - Muhammad
 Explanation of the authorization processes enhanced.
