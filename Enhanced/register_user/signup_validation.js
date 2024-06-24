@@ -3,7 +3,7 @@ function validateForm() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const userNameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/; 
+    const userNameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
