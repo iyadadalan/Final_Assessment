@@ -2,7 +2,6 @@
 session_start();
 
 include("../connection.php");
-
 $query = "select * from users where user_id = " . $_SESSION['user_id'];
 $result = mysqli_query($conn, $query);
 
@@ -34,8 +33,8 @@ if ($_SESSION['user_type'] !== 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com 'unsafe-inline';
-    style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://ajax.googleapis.com;
+    style-src 'self' https://fonts.googleapis.com;
     img-src 'self' https://images.pexels.com data:;
     font-src 'self' https://fonts.gstatic.com;
     frame-src 'self' https://www.google.com;
@@ -182,38 +181,41 @@ if ($_SESSION['user_type'] !== 'admin') {
       <div class="container">
         <div class="box">
           <div class="content">
-            <div class="input">
-                <label for="age">AGE</label>
-                <input type="text" class="text-input" id="age" autocomplete="off" required/>
+              <form id="bmiForm" onsubmit="return validateForm();">
+              <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+              <div class="input">
+                  <label for="age">AGE</label>
+                  <input type="text" class="text-input" id="age" autocomplete="off" required/>
+              </div>
+    
+              <div class="gender">
+                  <label class="container">
+                    <input type="radio" name="radio" id="m"><p class="text">MALE</p>
+                    <span class="checkmark"></span>
+                  </label>
+    
+                  <label class="container">
+                    <input type="radio" name="radio" id="f" ><p class="text">FEMALE</p>
+                    <span class="checkmark"></span>
+                  </label>
+              </div>
+    
+              <div class="containerHW">
+              <div class="inputH">
+                <label for="height">HEIGHT (cm)</label>
+                <input type="number" id="height" required>
+              </div>
+    
+              <div class="inputW">
+                <label for="weight">WEIGHT (kg)</label>
+                <input type="number" id="weight" required>
+              </div>
             </div>
-
-            <div class="gender">
-                <label class="container">
-                  <input type="radio" name="radio" id="m"><p class="text">MALE</p>
-                  <span class="checkmark"></span>
-                </label>
-
-                <label class="container">
-                  <input type="radio" name="radio" id="f" ><p class="text">FEMALE</p>
-                  <span class="checkmark"></span>
-                </label>
-            </div>
-
-            <div class="containerHW">
-            <div class="inputH">
-              <label for="height">HEIGHT (cm)</label>
-              <input type="number" id="height" required>
-            </div>
-
-            <div class="inputW">
-              <label for="weight">WEIGHT (kg)</label>
-              <input type="number" id="weight" required>
-            </div>
+    
+            <button class="calculate" id="submit" type="submit" >CALCULATE BMI</button>
+          </form>  
           </div>
-
-          <button class="calculate" id="submit" >CALCULATE BMI</button>
           
-          </div>
           <div class="result">
             <p>Your BMI is</p>
             <div id="result">00.00</div>

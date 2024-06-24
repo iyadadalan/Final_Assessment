@@ -15,7 +15,14 @@ if (isset($_GET['user_id'])) {
     $query = "DELETE FROM users WHERE user_id='$id'";
     $result = mysqli_query($conn, $query);
 
-    if ($result) {
+// Prepare an SQL statement for execution
+$stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
+if ($stmt) {
+    // Bind variables to the parameter markers of the prepared statement
+    $stmt->bind_param("i", $id);
+    
+    // Execute the prepared statement
+    if ($stmt->execute()) {
         header("Location: dashboard.php?msg=Data deleted successfully");
       } else {
         echo "Failed: " . mysqli_error($conn);

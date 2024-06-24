@@ -1,3 +1,29 @@
+function validateForm() {
+    var age = document.getElementById("age").value;
+    var height = document.getElementById("height").value;
+    var weight = document.getElementById("weight").value;
+
+    if (!age || age < 0 || age > 120) {
+        alert("Please enter a valid age.");
+        return false;
+    }
+
+    if (!height || height <= 0) {
+        alert("Please enter a valid height.");
+        return false;
+    }
+
+    if (!weight || weight <= 0) {
+        alert("Please enter a valid weight.");
+        return false;
+    }
+
+    return true; // Proceed with form submission if validations pass
+}
+
+document.getElementById("bmiForm").onsubmit = validateForm;
+
+
 var btn = document.getElementById("submit");
 var age = document.getElementById("age");
 var height = document.getElementById("height");
