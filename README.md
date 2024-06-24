@@ -112,6 +112,8 @@ VALUES ('admin', 'admin@example.com', '$2y$10$rqOZP1q4uLVgu/9TfZ6rZesQ8y9iynGs1U
 ### <a name="input-validation"/>Input Validation - Iyad
 Description and implementation details of input validation methods.
 
+For input validation, extensive use of both client-side and server-side strategies was implemented across all forms. Each input field in forms such as signup and login uses regex patterns that enforce specific formatting rules. These rules ensure that the input matches expected patterns such as valid email formats, strong password requirements (including upper and lowercase letters, numbers, and minimum length), and valid full names. On the client-side, JavaScript regex validation is used to provide immediate feedback before form submission. On the server-side, PHP scripts sanitize and validate data to prevent any malicious input from being processed or stored.
+
 ### <a name="authentication"/>Authentication - Muhammad
 Details on the authentication mechanisms implemented.
 
@@ -120,6 +122,15 @@ Explanation of the authorization processes enhanced.
 
 ### <a name="xss-and-csrf-prevention"/>XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
+
+To combat XSS and CSRF vulnerabilities, several measures have been taken:
+
+- **Content Security Policy (CSP):** A strict CSP is implemented to control the sources of content that can be loaded on the website. This includes restrictions on scripts, styles, and images to trusted sources and disallows inline scripts and styles to mitigate XSS attacks.
+- **CSRF Tokens:** CSRF tokens are used in all forms to ensure that requests are originated from the website's forms and not from external sources. This token is generated on the server-side, embedded in forms, and verified on each form submission.
+- **Sanitization:** All inputs from users are sanitized using PHP to encode or strip out potentially malicious characters and scripts, reducing the risk of XSS attacks.
+- **Escaping Output:** When displaying user input or data retrieved from the database, the application uses PHP functions to escape the output, ensuring that any executable code is rendered harmless.
+
+These strategies collectively enhance the security of the website by validating input data rigorously and defending against common web vulnerabilities like XSS and CSRF.
 
 ### <a name="database-security"/>Database Security - Arif
 
