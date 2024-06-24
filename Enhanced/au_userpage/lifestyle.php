@@ -2,6 +2,7 @@
 session_start();
 
 include("../connection.php");
+include("security_utils.php");
 
 $query = "select * from users";
 $result = mysqli_query($con, $query);
@@ -16,6 +17,10 @@ if ($result) {
   }
 } else {
   echo "Error: " . mysqli_error($con);
+}
+
+function sanitize_input($data) {
+    return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
 ?>
@@ -175,38 +180,40 @@ if ($result) {
       <div class="container">
         <div class="box">
           <div class="content">
-            <div class="input">
-                <label for="age">AGE</label>
-                <input type="text" class="text-input" id="age" autocomplete="off" required/>
+            <form id="bmiForm" onsubmit="return validateForm();">
+              <div class="input">
+                  <label for="age">AGE</label>
+                  <input type="text" class="text-input" id="age" autocomplete="off" required/>
+              </div>
+    
+              <div class="gender">
+                  <label class="container">
+                    <input type="radio" name="radio" id="m"><p class="text">MALE</p>
+                    <span class="checkmark"></span>
+                  </label>
+    
+                  <label class="container">
+                    <input type="radio" name="radio" id="f" ><p class="text">FEMALE</p>
+                    <span class="checkmark"></span>
+                  </label>
+              </div>
+    
+              <div class="containerHW">
+              <div class="inputH">
+                <label for="height">HEIGHT (cm)</label>
+                <input type="number" id="height" required>
+              </div>
+    
+              <div class="inputW">
+                <label for="weight">WEIGHT (kg)</label>
+                <input type="number" id="weight" required>
+              </div>
             </div>
-
-            <div class="gender">
-                <label class="container">
-                  <input type="radio" name="radio" id="m"><p class="text">MALE</p>
-                  <span class="checkmark"></span>
-                </label>
-
-                <label class="container">
-                  <input type="radio" name="radio" id="f" ><p class="text">FEMALE</p>
-                  <span class="checkmark"></span>
-                </label>
-            </div>
-
-            <div class="containerHW">
-            <div class="inputH">
-              <label for="height">HEIGHT (cm)</label>
-              <input type="number" id="height" required>
-            </div>
-
-            <div class="inputW">
-              <label for="weight">WEIGHT (kg)</label>
-              <input type="number" id="weight" required>
-            </div>
+    
+            <button class="calculate" id="submit" type="submit" >CALCULATE BMI</button>
+          </form>  
           </div>
-
-          <button class="calculate" id="submit" >CALCULATE BMI</button>
           
-          </div>
           <div class="result">
             <p>Your BMI is</p>
             <div id="result">00.00</div>
