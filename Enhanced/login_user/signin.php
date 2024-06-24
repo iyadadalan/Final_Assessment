@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../connection.php");
-include("security_utils.php");
+include("../security_utils.php");
 
 $csrf_token = generate_csrf_token();
 
