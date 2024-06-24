@@ -117,6 +117,87 @@ For input validation, extensive use of both client-side and server-side strategi
 ### <a name="authentication"/>Authentication - Muhammad
 Details on the authentication mechanisms implemented.
 
+This PHP script handles user authentication by validating the user's email and password during login. The authentication process involves verifying the supplied credentials against stored user data in a MySQL database. When the user want to sign in, there will be a comaprison login in the application with the Hashed Password.
+
+[signup.php](signup.php)
+
+## Form Handling
+```php
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $user_name = htmlspecialchars($_POST['user_name']);
+    $gender = htmlspecialchars($_POST['gender']);
+    $user_type = 'user';
+```
+
+- Checks if the request method is POST, indicating that the form has been submitted.
+
+## Password Hashing
+```php
+    if (!empty($email) && !empty($password)) {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $user_id = random_num(5);
+```
+
+- Ensures that both email and password fields are not empty.
+- Hashes the password using password_hash with the default algorithm (currently bcrypt).
+- Generates a random user ID using the random_num function.
+
+## Database Query
+```php
+        if ($stmt = $conn->prepare("CALL RegisterUser(?, ?, ?, ?, ?, ?)")) {
+            $stmt->bind_param("ssssss", $user_id, $email, $password_hash, $user_name, $gender, $user_type);
+            $stmt->execute();
+            $stmt->close();
+
+            header("Location: ../login_user/signin.php");
+            die;
+        } else {
+            echo "Database error: " . $conn->error;
+        }
+    } else {
+        echo "Please enter some valid information!";
+    }
+}
+```
+
+- Prepares a stored procedure call to register the user with the provided details.
+- Binds the parameters (user_id, email, password_hash, user_name, gender, and user_type) to the prepared statement and executes it.
+- Closes the statement and redirects the user to the login page upon successful registration.
+
+[signin.php](signin.php)
+
+## Credential Verification
+```php
+if ($result && $result->num_rows > 0) {
+    $user_data = $result->fetch_assoc();
+    
+    if (password_verify($password, $user_data['password'])) {
+        $_SESSION['user_id'] = $user_data['user_id'];
+        $_SESSION['username'] = $user_data['username'];
+        $_SESSION['email'] = $user_data['email'];
+        $_SESSION['user_type'] = $user_data['user_type'];
+```
+
+- Checks if the result set contains any rows, indicating that a user with the provided email exists.
+- Fetches the user data and verifies the supplied password against the hashed password stored in the database using password_verify.
+
+## Session Management and Redirection
+```php
+if ($user_data['user_type'] == 'admin') {
+    header('Location: ../adminpage/admin_index.php');
+} elseif ($user_data['user_type'] == 'user') {
+    header('Location: ../au_userpage/user_index.php');
+}
+exit;
+```
+
+- If password verification is successful, sets session variables with user details.
+- Redirects the user to the appropriate page based on their user type (admin or user).
+
+Protecting Website with .htaccess file
+
 ### <a name="authorization"/>Authorization - Muhammad
 Explanation of the authorization processes enhanced.
 
