@@ -21,6 +21,11 @@ if ($result) {
   echo "Error: " . mysqli_error($con);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verify_csrf_token($_POST['csrf_token'])) {
+        die('CSRF token validation failed.');
+    }
+
 function sanitize_input($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
