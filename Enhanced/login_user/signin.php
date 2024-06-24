@@ -1,12 +1,18 @@
 <?php
 session_start();
 include("../connection.php");
-// Unset all of the session variables
+include("security_utils.php");
+
+$csrf_token = generate_csrf_token(); // Generate CSRF token
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
+    
+    if (!verify_csrf_token($_POST['csrf_token'])) {
+        die('CSRF token validation failed.');
+    }
 
     if (!empty($email) && !empty($password)) {
         // Prepare the stored procedure call to get user details by email
@@ -56,6 +62,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </script>';
     }
 }
+
+    // Regex patterns for validation
+    $regex_email = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    $regex_password = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/";
+
+    // Validate input
+    if (!preg_match($regex_email, $email) || !preg_match($regex_password, $password)) {
+        echo '<script>
+            alert("Invalid email or password format!");
+            window.location.href = "signin.php";
+        </script>';
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -63,16 +83,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self';
+        style-src 'self' https://fonts.googleapis.com;
+        img-src 'self';
+        connect-src 'self';
+        form-action 'self';
+        font-src 'self' https://fonts.gstatic.com;
+        base-uri 'self';">
     <link rel="stylesheet" type="text/css" href="loginUser.css">
+    <script src="signin_validation.js"></script>
 </head>
 <body>
     <div id="form">
         <h1>Login</h1>
         <form method="POST" autocomplete="off">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
             <label>Email: </label>
-            <input type="email" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required></br></br>
+            <input type="email" id="email" name="email" required></br></br>
             <label>Password: </label>
-            <input type="password" id="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required></br></br>
+            <input type="password" id="password" name="password" required></br></br>
             <input type="submit" id="btn" value="Submit"><br><br>
             <a href="../register_user/signup.php">Click to Sign Up</a>
         </form>
