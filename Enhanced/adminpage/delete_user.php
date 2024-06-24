@@ -12,17 +12,29 @@ if ($_SESSION['user_type'] !== 'admin') {
   echo "Not logged in.";
 }
 // Handle user deletion
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $query = "DELETE FROM users WHERE user_id='$id'";
-    $result = mysqli_query($con, $query);
+$id = $_GET["user_id"];
 
-    if ($result) {
+// Prepare an SQL statement for execution
+$stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
+if ($stmt) {
+    // Bind variables to the parameter markers of the prepared statement
+    $stmt->bind_param("i", $id);
+    
+    // Execute the prepared statement
+    if ($stmt->execute()) {
         header("Location: dashboard.php?msg=Data deleted successfully");
-      } else {
-        echo "Failed: " . mysqli_error($con);
-      }
+    } else {
+        echo "Failed: " . $stmt->error;
+    }
+    
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Failed: " . $conn->error;
 }
+
+// Close the database connection
+$conn->close();
 
 
 ?>
