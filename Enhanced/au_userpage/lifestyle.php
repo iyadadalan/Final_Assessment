@@ -4,6 +4,8 @@ session_start();
 include("../connection.php");
 include("security_utils.php");
 
+$csrf_token = generate_csrf_token();
+
 $query = "select * from users";
 $result = mysqli_query($con, $query);
 
@@ -181,6 +183,7 @@ function sanitize_input($data) {
         <div class="box">
           <div class="content">
             <form id="bmiForm" onsubmit="return validateForm();">
+              <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
               <div class="input">
                   <label for="age">AGE</label>
                   <input type="text" class="text-input" id="age" autocomplete="off" required/>
