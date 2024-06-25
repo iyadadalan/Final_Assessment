@@ -271,7 +271,63 @@ Hackers4Flat:IyadMadArif
 ### <a name="authorization"/>Authorization - Muhammad
 Explanation of the authorization processes enhanced.
 
+Authorization is the process of determining what actions a user is allowed to perform and what resources they can access within a system. It follows the authentication process, which verifies the user's identity.
 
+## Key Concepts:
+
+1. Roles: Groups of permissions assigned to users (e.g., Admin, User).
+2. Permissions: Specific rights to perform actions or access resources (e.g., read, write).
+3. Access Control Models:
+  - Role-Based Access Control (RBAC): Users are assigned roles, and roles have permissions.
+  - Attribute-Based Access Control (ABAC): Access is granted based on attributes (user, resource, environment).
+
+## Process:
+User Authentication: The user provides credentials and is authenticated.
+Assigning Roles/Permissions: The system assigns roles/permissions to the user.
+Access Request: The user attempts to access a resource.
+Policy Evaluation: The system evaluates the request against access policies.
+Decision Making: The system allows or denies access based on the evaluation.
+Enforcement: The system enforces the decision, granting or denying access.
+
+## Session Management
+Session Start
+
+Starting a session is essential for maintaining state between the user's interactions with a web application. This is commonly done using session_start() in PHP.
+```
+session_start();
+```
+
+- This function starts a new session or resumes an existing one.
+- It enables storing user information across different pages.
+- Typically used at the beginning of a script to access session variables.
+
+Session Destroy
+
+Ending a session ensures that all session data is cleared and the user is effectively logged out. This involves unsetting session variables, deleting the session cookie, and destroying the session.
+Unset All Session Variables
+
+```
+$_SESSION = array();
+```
+- Clears the $_SESSION array, removing all session data.
+
+Delete the Session Cookies
+```
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+```
+- Checks if sessions are using cookies and deletes the session cookie by setting its expiration time to the past.
+
+Destroy the Session
+```
+session_destroy();
+```
+- Destroys the session data on the server.
 
 ### <a name="xss-and-csrf-prevention"/>XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
