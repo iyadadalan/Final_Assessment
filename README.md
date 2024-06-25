@@ -13,6 +13,7 @@
   - [XSS and CSRF Prevention](#xss-and-csrf-prevention)
   - [Database Security](#database-security)
   - [File Security](#file-security)
+-[Reference](#reference)
 
 ## Group Members
 Wan Hamzah Iyad bin Wan Adlan (2115449) - Leader
@@ -275,7 +276,7 @@ Strategies used to prevent XSS and CSRF vulnerabilities.
 To combat XSS and CSRF vulnerabilities, several measures have been taken:
 
 - **Content Security Policy (CSP):** A strict CSP is implemented to control the sources of content that can be loaded on the website. This includes restrictions on scripts, styles, and images to trusted sources and disallows inline scripts and styles to mitigate XSS attacks. A CSP has been added for each page, taking into account the specific resources and scripts utilized on that page.  By customizing the CSP directives to match the unique requirements of each page, the security policy provides precise control over resource loading and script execution, thereby enhancing the overall security posture of the website.
-- join_us.php:
+  - join_us.php:
 ```html
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -290,7 +291,7 @@ To combat XSS and CSRF vulnerabilities, several measures have been taken:
     child-src 'none';">
   ```
 - **CSRF Tokens:** CSRF tokens are used in all forms to ensure that requests are originated from the website's forms and not from external sources. This token is generated on the server-side, embedded in forms, and verified on each form submission.
-- CSRF Token generation and verification (signin.php)
+  - CSRF Token generation and verification (signin.php)
 ```php
 // CSRF token generation and verification
 if (empty($_SESSION['csrf_token'])) {
@@ -304,11 +305,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 ```
 CSRF token in hidden ``<form>`` tag:
-```hthml
+```html
 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
 ```
 - **Sanitization:** All inputs from users are sanitized using PHP to encode or strip out potentially malicious characters and scripts, reducing the risk of XSS attacks.
-- join_us.php
+  - join_us.php
 ```php
 // Sanitize and validate inputs
 $fullName = sanitize_input($_POST['fullName']);
@@ -419,3 +420,8 @@ Directory listing in a web server like Apache (which XAMPP uses) can expose the 
 - FollowSymLinks: Allows Apache to follow symbolic links.
 - Includes: Allows server-side includes (SSI).
 - ExecCGI: Allows execution of CGI scripts.
+
+### <a name="reference"/>Reference
+- https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation
+- https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+- https://portswigger.net/web-security/cross-site-scripting/preventing
