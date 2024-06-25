@@ -329,6 +329,33 @@ session_destroy();
 ```
 - Destroys the session data on the server.
 
+## HttpOnly and Secure Cookies
+
+Description of Apache Configuration:
+
+Loading the Headers Module
+![Screenshot 2024-06-25 145035](https://github.com/iyadadalan/Final_Assessment/assets/122088412/85632af3-e9bf-43bb-8642-3939e9b0b3fa)
+
+- This line loads the mod_headers module, which allows for the manipulation of HTTP headers.
+
+Setting HttpOnly and Secure Attribute
+![Screenshot 2024-06-25 161641](https://github.com/iyadadalan/Final_Assessment/assets/122088412/4cdb8ff5-fa50-4cb8-80d4-d1c59f50da8a)
+
+- This modified directive ensures that both HttpOnly and Secure attributes are added to all Set-Cookie headers, providing additional security by ensuring the cookies are protected both from client-side access and during transmission.
+
+## SSL certificate for localhost
+
+SSL (Secure Sockets Layer) certificates are essential for encrypting data transmitted between a server and a client, ensuring secure communication over the internet. Belwo is the process of configuration:
+
+Download important file
+![Screenshot 2024-06-25 162923](https://github.com/iyadadalan/Final_Assessment/assets/122088412/79ae513e-94fe-45d4-8815-975265ce8e07)
+
+Chnage the name of DNS.1
+![Screenshot 2024-06-25 164051](https://github.com/iyadadalan/Final_Assessment/assets/122088412/c5ad2146-fc99-411e-aabe-b2e284960490)
+
+Restart the apache and the the website is secured with https://
+![Screenshot 2024-06-25 150314](https://github.com/iyadadalan/Final_Assessment/assets/122088412/07767ac3-9306-4adb-b2d6-2ebfd1b322ef)
+
 ### <a name="xss-and-csrf-prevention"/>XSS and CSRF Prevention - Iyad
 Strategies used to prevent XSS and CSRF vulnerabilities.
 
