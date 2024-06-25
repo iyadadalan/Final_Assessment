@@ -5,6 +5,7 @@
 - [Group Members](#group-members)
 - [Web Application Overview](#webapp)
 - [Objectives](#objectives)
+- [Database Setup](#db)
 - [Enhancements](#enhancements)
   - [Input Validation](#input-validation)
   - [Authentication](#authentication)
@@ -43,7 +44,7 @@ Key features of the SweatFactory website include:
 3. **Preventing Web Attacks:** Introduce advanced safeguards to defend against common web vulnerabilities such as Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and SQL injection.
 4. **Ensuring Secure User Interactions:** Deploy mechanisms like Content Security Policies (CSP) to secure user interactions with the website.
 
-## Database Setup
+##  <a name="db"/>Database Setup
 
 Step 1: Create a new database:
 ```sql
@@ -110,9 +111,73 @@ VALUES ('admin', 'admin@example.com', '$2y$10$rqOZP1q4uLVgu/9TfZ6rZesQ8y9iynGs1U
 ## Enhancements
 
 ### <a name="input-validation"/>Input Validation - Iyad
-Description and implementation details of input validation methods.
-
 For input validation, extensive use of both client-side and server-side strategies was implemented across all forms. Each input field in forms such as signup and login uses regex patterns that enforce specific formatting rules. These rules ensure that the input matches expected patterns such as valid email formats, strong password requirements (including upper and lowercase letters, numbers, and minimum length), and valid full names. On the client-side, JavaScript regex validation is used to provide immediate feedback before form submission. On the server-side, PHP scripts sanitize and validate data to prevent any malicious input from being processed or stored.
+
+- Client-side validation (lifestyle.js)
+```js
+function validateForm() {
+    var age = document.getElementById("age").value;
+    var height = document.getElementById("height").value;
+    var weight = document.getElementById("weight").value;
+
+    if (!age || age < 0 || age > 120) {
+        alert("Please enter a valid age.");
+        return false;
+    }
+
+    if (!height || height <= 0) {
+        alert("Please enter a valid height.");
+        return false;
+    }
+
+    if (!weight || weight <= 0) {
+        alert("Please enter a valid weight.");
+        return false;
+    }
+
+    return true; // Proceed with form submission if validations pass
+}
+```
+ 
+- Client-side Input Validation using RegEx (signin_validation.js)
+```js
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("form").onsubmit = function () {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert("Password must contain at least one number, one uppercase and one lowercase letter, and at least 8 or more characters");
+            return false;
+        }
+
+        return true;
+    };
+});
+```
+- Server-side Input Validation (signin.php)
+```php
+       // Regex patterns for validation
+       $regex_email = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+       $regex_password = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/";
+   
+       // Validate input
+       if (!preg_match($regex_email, $email) || !preg_match($regex_password, $password)) {
+           echo '<script>
+               alert("Invalid email or password format!");
+               window.location.href = "signin.php";
+           </script>';
+           exit;
+       }
+```
 
 ### <a name="authentication"/>Authentication - Muhammad
 Details on the authentication mechanisms implemented.
