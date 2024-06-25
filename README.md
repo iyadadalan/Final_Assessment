@@ -32,6 +32,9 @@ Muhammad Arif Faisal bin Zahari (2117277)
 **Name of Website:** SweatFactory
 
 ### Introduction
+
+<img src="https://github.com/iyadadalan/Final_Assessment/assets/92302244/79bd08a3-340b-4f27-a9df-3605a943e9e1" width="35%" alt="SWEATFACTORY">
+
 SweatFactory is an engaging website designed specifically for a mock organization focused on gym services and promoting a healthy lifestyle. The website offers a variety of features ranging from exercise tutorials, dietary guidance, lifestyle management tips, and a user-friendly BMI calculator. This platform stands out by providing a comprehensive fitness experience that is both informative and engaging.
 
 Key features of the SweatFactory website include:
