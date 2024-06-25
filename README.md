@@ -13,7 +13,7 @@
   - [XSS and CSRF Prevention](#xss-and-csrf-prevention)
   - [Database Security](#database-security)
   - [File Security](#file-security)
--[Reference](#reference)
+- [Reference](#reference)
 
 ## Group Members
 Wan Hamzah Iyad bin Wan Adlan (2115449) - Leader
