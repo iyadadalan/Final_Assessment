@@ -9,9 +9,7 @@ if ($_SESSION['user_type'] !== 'admin') {
         header("Location: ../index.php");
         exit();
     }
-} else {
-    echo "Not logged in.";
-}
+} 
 
 $username = $_SESSION['username'];
 
