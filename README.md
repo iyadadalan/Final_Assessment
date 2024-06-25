@@ -308,14 +308,6 @@ if ($stmt = $conn->prepare("CALL GetUserByEmail(?)")) {
     $stmt->close();
 }
 ```
-3. Password Hashing <br>
-Passwords are hashed before being stored in the database. Hashing ensures that even if the database is compromised, the actual passwords are not exposed. The ```password_hash``` function is used to create a secure hash of the password.
-
-Example:
-```php
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-```
 ### <a name="file-security"/>File Security - Arif
 Methods used to secure file management and storage.
 1. Restrict Diretory Listing <br>
