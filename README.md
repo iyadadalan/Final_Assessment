@@ -293,7 +293,7 @@ Enforcement: The system enforces the decision, granting or denying access.
 Session Start
 
 Starting a session is essential for maintaining state between the user's interactions with a web application. This is commonly done using session_start() in PHP.
-```
+```php
 session_start();
 ```
 
@@ -306,13 +306,13 @@ Session Destroy
 Ending a session ensures that all session data is cleared and the user is effectively logged out. This involves unsetting session variables, deleting the session cookie, and destroying the session.
 Unset All Session Variables
 
-```
+```php
 $_SESSION = array();
 ```
 - Clears the $_SESSION array, removing all session data.
 
 Delete the Session Cookies
-```
+```php
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -324,7 +324,7 @@ if (ini_get("session.use_cookies")) {
 - Checks if sessions are using cookies and deletes the session cookie by setting its expiration time to the past.
 
 Destroy the Session
-```
+```php
 session_destroy();
 ```
 - Destroys the session data on the server.
